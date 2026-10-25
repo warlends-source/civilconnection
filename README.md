@@ -75,6 +75,17 @@ The projects look for the products in `C:\Program Files\Autodesk\Revit 2027` and
 * The CivilConnection build creates the Dynamo package in `bin\Release\CivilConnection2027` and copies it to `%AppData%\Dynamo\Dynamo Revit\4.1\packages` (add `-p:DeployPackage=false` to skip the copy).
 * The CivilPython build creates `bin\Release\CivilPython.bundle`. Copy that folder to `C:\ProgramData\Autodesk\ApplicationPlugins` so that Civil 3D 2027 can run the commands CivilConnection uses. Python scripting stays disabled in this release.
 
+## Robot Structural Analysis (2027)
+When Robot Structural Analysis Professional 2027 is installed, the 2027 package also contains the `CivilConnection.Robot.RobotModel` nodes, which drive Robot through its COM API (`-p:RobotPath=...` points the build to another install folder; `-p:WithRobot=false` leaves the nodes out).
+
+* **Connection**: `RobotModel.Connect` attaches to the running Robot session (open Robot with a project first). `lengthUnitToMeters` converts Dynamo units to meters (negative = read from the Revit document) and `origin` moves the model close to (0,0,0), which matters for Civil 3D coordinates.
+* **Civil 3D to Robot**: `BarsFromFeaturelines`, `BarsFromAlignment` and `DeckPanelsBetweenFeaturelines`, plus generic `CreateNodes`, `CreateBars` and `CreatePanels` for any Dynamo geometry (e.g. `CivilSurface.GetTrianglesSurfaces`).
+* **Revit to Robot**: `FromRevitAnalytical` sends analytical members and panels (or the physical elements they belong to), creating rectangular sections and materials from the Revit structural assets.
+* **Labels, loads and combinations**: `CreateMaterial`, `CreateRectangularSection`, `CreatePanelThickness` (with elastic foundation), `CreateSupport`, `CreateLoadCase`, `AddSelfWeight`, `AddNodalForces`, `AddBarUniformLoads`, `AddPanelUniformLoads`, `CreateCombination`, `GenerateMesh`, `Calculate`, `SaveAs`.
+* **Results**: `NodeDisplacements`, `NodeReactions`, `BarForces`, `PanelForces` and `NearestNodes`.
+
+Loads and results are in SI units (N, m, Pa). Every run of a graph adds objects to the Robot model, so use `Connect` with `newProject = true` to rebuild it from scratch. Connect `waitFor` inputs to control the order of the steps.
+
 ## License
 See [LICENSING.md](LICENSING.md)
 

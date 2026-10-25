@@ -34,11 +34,21 @@
     <C3DPath Condition="'$(C3DPath)' == '' And Exists('C:\Program Files\Autodesk\AutoCAD 2027\acad.exe')">C:\Program Files\Autodesk\AutoCAD 2027</C3DPath>
     <C3DPath Condition="'$(C3DPath)' == ''">D:\Autodesk\AutoCAD 2027</C3DPath>
     <DynamoPath>$(RevitPath)\AddIns\DynamoForRevit</DynamoPath>
+    <RobotPath Condition="'$(RobotPath)' == '' And Exists('C:\Program Files\Autodesk\Robot Structural Analysis Professional 2027\Exe\Interop.RobotOM.dll')">C:\Program Files\Autodesk\Robot Structural Analysis Professional 2027</RobotPath>
+    <RobotPath Condition="'$(RobotPath)' == ''">D:\Autodesk\Robot Structural Analysis Professional 2027</RobotPath>
+    <!-- The Robot nodes are built only when Robot 2027 is installed (or RobotPath is passed) -->
+    <WithRobot Condition="'$(WithRobot)' == '' And Exists('$(RobotPath)\Exe\Interop.RobotOM.dll')">true</WithRobot>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\..\2020\Autodesk2020\*.cs" />
     <None Include="pkg2027.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
+  <!-- Autodesk Robot Structural Analysis 2027 (COM, embedded interop types) -->
+  <ItemGroup Condition="'$(WithRobot)' == 'true'">
+    <Compile Include="Robot\*.cs" />
+    <Reference Include="Interop.RobotOM" HintPath="$(RobotPath)\Exe\Interop.RobotOM.dll" EmbedInteropTypes="true" />
   </ItemGroup>
 
   <!-- Civil 3D COM type libraries (embedded, no runtime dependency on the interop assemblies) -->

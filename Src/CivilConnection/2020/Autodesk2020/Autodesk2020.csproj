@@ -264,6 +264,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RevitFailuresPreprocessor.cs" />
     <Compile Include="RevitFamilyLoadOptions.cs" />
+    <Compile Include="RevitCompat.cs" />
     <Compile Include="RevitUtils.cs" />
     <Compile Include="Ring.cs" />
     <Compile Include="SessionVariables.cs" />

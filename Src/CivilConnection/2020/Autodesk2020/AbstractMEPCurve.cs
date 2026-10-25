@@ -179,7 +179,7 @@ namespace CivilConnection
         /// <param name="type">The type.</param>
         protected void InternalSetMEPCurveType(Autodesk.Revit.DB.MEPCurveType type)
         {
-            if (InternalMEPCurve.GetTypeId().IntegerValue.Equals(type.Id.IntegerValue))
+            if (InternalMEPCurve.GetTypeId().GetValue().Equals(type.Id.GetValue()))
                 return;
 
             TransactionManager.Instance.EnsureInTransaction(DocumentManager.Instance.CurrentDBDocument);

@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    CivilPython for Civil 3D 2027 (.NET 10).
+    Only the hidden export commands used by CivilConnection are active; Python scripting is disabled (see README).
+    Source is shared with the legacy project in ..\CivilPython.
+    Override the install folder with: dotnet build -p:C3DPath="..."
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>CivilPython</AssemblyName>
+    <RootNamespace>CivilPython</RootNamespace>
+    <DefineConstants>$(DefineConstants);C2027</DefineConstants>
+    <Version>2027.0.0</Version>
+    <Company>Autodesk, Inc.</Company>
+    <Product>CivilPython</Product>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+
+    <C3DPath Condition="'$(C3DPath)' == '' And Exists('C:\Program Files\Autodesk\AutoCAD 2027\acad.exe')">C:\Program Files\Autodesk\AutoCAD 2027</C3DPath>
+    <C3DPath Condition="'$(C3DPath)' == ''">D:\Autodesk\AutoCAD 2027</C3DPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\CivilPython\CivilPython.cs" />
+  </ItemGroup>
+
+  <!-- AutoCAD / Civil 3D managed API, provided by the host at runtime -->
+  <ItemGroup>
+    <Reference Include="accoremgd" HintPath="$(C3DPath)\accoremgd.dll" Private="false" />
+    <Reference Include="acdbmgd" HintPath="$(C3DPath)\acdbmgd.dll" Private="false" />
+    <Reference Include="acdbmgdbrep" HintPath="$(C3DPath)\acdbmgdbrep.dll" Private="false" />
+    <Reference Include="acmgd" HintPath="$(C3DPath)\acmgd.dll" Private="false" />
+    <Reference Include="AdWindows" HintPath="$(C3DPath)\AdWindows.dll" Private="false" />
+    <Reference Include="AecBaseMgd" HintPath="$(C3DPath)\ACA\AecBaseMgd.dll" Private="false" />
+    <Reference Include="AecPropDataMgd" HintPath="$(C3DPath)\ACA\AecPropDataMgd.dll" Private="false" />
+    <Reference Include="AeccDbMgd" HintPath="$(C3DPath)\C3D\AeccDbMgd.dll" Private="false" />
+    <Reference Include="AeccPressurePipesMgd" HintPath="$(C3DPath)\C3D\AeccPressurePipesMgd.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Assemble CivilPython.bundle (copy it to C:\ProgramData\Autodesk\ApplicationPlugins to install) -->
+  <Target Name="CreateBundle" AfterTargets="Build">
+    <PropertyGroup>
+      <BundleDir>$(OutDir)CivilPython.bundle\</BundleDir>
+    </PropertyGroup>
+    <Copy SourceFiles="PackageContents.xml" DestinationFolder="$(BundleDir)" />
+    <Copy SourceFiles="$(OutDir)$(AssemblyName).dll;$(OutDir)$(AssemblyName).pdb" DestinationFolder="$(BundleDir)Contents\2027" />
+    <Message Importance="High" Text="CivilPython bundle: $(BundleDir)" />
+  </Target>
+</Project>

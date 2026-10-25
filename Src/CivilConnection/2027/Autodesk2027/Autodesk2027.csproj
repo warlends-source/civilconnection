@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    CivilConnection for Civil 3D / Revit 2027 (Dynamo for Revit 4.1, .NET 10).
+    Source files are shared with the legacy .NET Framework project in ..\..\2020\Autodesk2020.
+    Override the install folders with: dotnet build -p:RevitPath="..." -p:C3DPath="..."
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>Autodesk2027</AssemblyName>
+    <RootNamespace>CivilConnection</RootNamespace>
+    <DefineConstants>$(DefineConstants);C2027</DefineConstants>
+    <Version>7.0.0</Version>
+    <Company>Autodesk, Inc.</Company>
+    <Product>CivilConnection2027</Product>
+    <Copyright>Autodesk, Inc. Copyright © 2019</Copyright>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <!-- CS1591/CS0419: missing or ambiguous XML docs; CS0108: hidden members (as in 2023) -->
+    <NoWarn>$(NoWarn);CS1591;CS0419;CS0108;CA1416</NoWarn>
+
+    <C3DVersion>2027</C3DVersion>
+    <DynRevitVersion>4.1</DynRevitVersion>
+    <RevitPath Condition="'$(RevitPath)' == '' And Exists('C:\Program Files\Autodesk\Revit 2027\RevitAPI.dll')">C:\Program Files\Autodesk\Revit 2027</RevitPath>
+    <RevitPath Condition="'$(RevitPath)' == ''">D:\Revit 2027</RevitPath>
+    <C3DPath Condition="'$(C3DPath)' == '' And Exists('C:\Program Files\Autodesk\AutoCAD 2027\acad.exe')">C:\Program Files\Autodesk\AutoCAD 2027</C3DPath>
+    <C3DPath Condition="'$(C3DPath)' == ''">D:\Autodesk\AutoCAD 2027</C3DPath>
+    <DynamoPath>$(RevitPath)\AddIns\DynamoForRevit</DynamoPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\2020\Autodesk2020\*.cs" />
+    <None Include="pkg2027.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
+  <!-- Civil 3D COM type libraries (embedded, no runtime dependency on the interop assemblies) -->
+  <ItemGroup>
+    <Reference Include="Autodesk.AEC.Interop.Base" HintPath="$(C3DPath)\ACA\Autodesk.AEC.Interop.Base.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AEC.Interop.UIBase" HintPath="$(C3DPath)\ACA\Autodesk.AEC.Interop.UIBase.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AECC.Interop.Land" HintPath="$(C3DPath)\C3D\Autodesk.AECC.Interop.Land.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AECC.Interop.Roadway" HintPath="$(C3DPath)\C3D\Autodesk.AECC.Interop.Roadway.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AECC.Interop.UiLand" HintPath="$(C3DPath)\C3D\Autodesk.AECC.Interop.UiLand.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AECC.Interop.UiRoadway" HintPath="$(C3DPath)\C3D\Autodesk.AECC.Interop.UiRoadway.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AutoCAD.Interop" HintPath="$(C3DPath)\Autodesk.AutoCAD.Interop.dll" EmbedInteropTypes="true" />
+    <Reference Include="Autodesk.AutoCAD.Interop.Common" HintPath="$(C3DPath)\Autodesk.AutoCAD.Interop.Common.dll" EmbedInteropTypes="true" />
+  </ItemGroup>
+
+  <!-- Revit and Dynamo for Revit, provided by the host at runtime -->
+  <ItemGroup>
+    <Reference Include="RevitAPI" HintPath="$(RevitPath)\RevitAPI.dll" Private="false" />
+    <Reference Include="RevitAPIUI" HintPath="$(RevitPath)\RevitAPIUI.dll" Private="false" />
+    <Reference Include="CoreNodeModels" HintPath="$(DynamoPath)\nodes\CoreNodeModels.dll" Private="false" />
+    <Reference Include="DSCoreNodes" HintPath="$(DynamoPath)\DSCoreNodes.dll" Private="false" />
+    <Reference Include="DynamoCore" HintPath="$(DynamoPath)\DynamoCore.dll" Private="false" />
+    <Reference Include="DynamoServices" HintPath="$(DynamoPath)\DynamoServices.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="$(DynamoPath)\Newtonsoft.Json.dll" Private="false" />
+    <Reference Include="ProtoCore" HintPath="$(DynamoPath)\ProtoCore.dll" Private="false" />
+    <Reference Include="ProtoGeometry" HintPath="$(DynamoPath)\ProtoGeometry.dll" Private="false" />
+    <Reference Include="DynamoRevitDS" HintPath="$(DynamoPath)\Revit\DynamoRevitDS.dll" Private="false" />
+    <Reference Include="RevitNodes" HintPath="$(DynamoPath)\Revit\RevitNodes.dll" Private="false" />
+    <Reference Include="RevitServices" HintPath="$(DynamoPath)\Revit\RevitServices.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Assemble the Dynamo package and deploy it to the Dynamo for Revit packages folder -->
+  <Target Name="CreateDynamoPackage" AfterTargets="Build">
+    <PropertyGroup>
+      <PackageDir>$(OutDir)CivilConnection$(C3DVersion)\</PackageDir>
+      <DeployFolder>$(AppData)\Dynamo\Dynamo Revit\$(DynRevitVersion)\packages\CivilConnection$(C3DVersion)\</DeployFolder>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageBin Include="$(OutDir)$(AssemblyName).dll;$(OutDir)$(AssemblyName).pdb;$(OutDir)$(AssemblyName).xml" />
+    </ItemGroup>
+    <MakeDir Directories="$(PackageDir)bin;$(PackageDir)dyf;$(PackageDir)extra" />
+    <Copy SourceFiles="@(PackageBin)" DestinationFolder="$(PackageDir)bin" />
+    <Copy SourceFiles="$(OutDir)pkg$(C3DVersion).json" DestinationFiles="$(PackageDir)pkg.json" />
+    <ItemGroup>
+      <PackageFiles Include="$(PackageDir)**\*.*" />
+    </ItemGroup>
+    <Copy Condition="'$(DeployPackage)' != 'false'" SourceFiles="@(PackageFiles)" DestinationFolder="$(DeployFolder)%(RecursiveDir)" />
+    <Message Importance="High" Text="CivilConnection$(C3DVersion) package: $(PackageDir)" />
+  </Target>
+</Project>

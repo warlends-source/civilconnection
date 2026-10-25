@@ -309,7 +309,11 @@ namespace CivilConnection
             Curve cc = null;
             Dictionary<double, Curve> pairs = new Dictionary<double, Curve>();
             if (!ca.IsCyclic && !cb.IsCyclic &&
+#if C2027
+               ca.Intersect(cb, CurveIntersectResultOption.Simple).Result != SetComparisonResult.Disjoint &&
+#else
                ca.Intersect(cb) != SetComparisonResult.Disjoint &&
+#endif
                (ca.GetEndPoint(1) - ca.GetEndPoint(0))
                .CrossProduct(cb.GetEndPoint(1) - cb.GetEndPoint(0))
                .IsAlmostEqualTo(XYZ.Zero)

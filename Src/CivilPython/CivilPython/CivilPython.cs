@@ -22,8 +22,10 @@ using Autodesk.AutoCAD.Runtime;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 
+#if !C2027
 using IronPython.Hosting;
-#if !C2022
+#endif
+#if !(C2022 || C2027)
 using Microsoft.Scripting.Hosting;
 #endif
 using System.Reflection;
@@ -42,7 +44,7 @@ namespace CivilPython
     {
         private void PythonConsole(bool cmdLine)
         {
-#if C2022
+#if (C2022 || C2027)
             System.Windows.Forms.MessageBox.Show("Congratulations! CivilConnection can now be used.\n" + 
                 "You can now close this message.\n\n" +
                 "NOTE: The execution of Python scripts via this command has been disabled starting from Civil 3D 2022.\n" +

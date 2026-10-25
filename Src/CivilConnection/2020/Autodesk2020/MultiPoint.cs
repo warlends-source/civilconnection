@@ -84,7 +84,7 @@ namespace CivilConnection
 
                 PolyCurve outline = PolyCurve.ByPoints(this.ShapePoints.Points.Select(p => p.RevitPoint).ToList(), true);
 
-                outline = PolyCurve.ByJoinedCurves(outline.PullOntoPlane(Plane.XY()).Explode().Cast<Curve>().ToList());
+                outline = PolyCurve.ByJoinedCurves(outline.PullOntoPlane(Plane.XY()).Explode().Cast<Curve>().ToList(), 0.001);
 
                 var output = Floor.ByOutlineTypeAndLevel(outline, floorType, level);
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0"
+                    AutodeskProduct="AutoCAD"
+                    ProductType="Application"
+                    Name="CivilPython">
+  <CompanyDetails Name="" Phone=" " Url="" Email="" />
+  <!-- R26.0 = Civil 3D 2027. This build targets .NET 10 and does not load in earlier releases. -->
+  <RuntimeRequirements SeriesMax="R26.0"
+                       SeriesMin="R26.0"
+                       Platform="Civil3D"
+                       OS="Win64" />
+  <Components>
+    <ComponentEntry AppName="CivilPython"
+                    Version="2027.0"
+                    ModuleName="./Contents/2027/CivilPython.dll"
+                    AppDescription="Commands used by CivilConnection to exchange data with Revit"
+                    LoadOnCommandInvocation="True" LoadOnRequest="True">
+      <Commands>
+        <Command Local="Python" Global="Python" />
+        <Command Local="-python" Global="-python" />
+        <Command Local="-replacesolid" Global="-replacesolid" />
+        <Command Local="-ExportLandFeatureLinesToXml" Global="-ExportLandFeatureLinesToXml" />
+        <Command Local="-ExportCorridorFeatureLinesToXML" Global="-ExportCorridorFeatureLinesToXML" />
+        <Command Local="-ExportSubassemblyShapesToXML" Global="-ExportSubassemblyShapesToXML" />
+        <Command Local="-ExportSubassemblyLinksToXML" Global="-ExportSubassemblyLinksToXML" />
+        <Command Local="-ExportSurfaceToXML" Global="-ExportSurfaceToXML" />
+        <Command Local="-ExportSurfaceTrianglesToXML" Global="-ExportSurfaceTrianglesToXML" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

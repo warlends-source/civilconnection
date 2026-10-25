@@ -55,6 +55,29 @@ namespace CivilConnection
         /// </value>
         internal object InternalElement { get { return this.mApp; } }
 
+#if C2027
+        [DllImport("ole32.dll", CharSet = CharSet.Unicode, PreserveSig = false)]
+        private static extern void CLSIDFromProgID(string progId, out Guid clsid);
+
+        [DllImport("oleaut32.dll", PreserveSig = false)]
+        private static extern void GetActiveObject(ref Guid rclsid, IntPtr reserved, [MarshalAs(UnmanagedType.IUnknown)] out object ppunk);
+
+        /// <summary>
+        /// Replacement for Marshal.GetActiveObject, which is not available in .NET Core / .NET 5+.
+        /// </summary>
+        private static object GetActiveObject(string progId)
+        {
+            CLSIDFromProgID(progId, out Guid clsid);
+            GetActiveObject(ref clsid, IntPtr.Zero, out object obj);
+            return obj;
+        }
+#else
+        private static object GetActiveObject(string progId)
+        {
+            return Marshal.GetActiveObject(progId);
+        }
+#endif
+
         /// <summary>
         /// Gets the application.
         /// </summary>
@@ -79,12 +102,15 @@ namespace CivilConnection
             progids = new string[] {"AeccXUiRoadway.AeccRoadwayApplication.13.4"};  // 2022
 #elif C2023
             progids = new string[] {"AeccXUiRoadway.AeccRoadwayApplication.13.5"};  // 2023
+#elif C2027
+            m_sAcadProdID = "AutoCAD.Application.26"; // only bind to a running 2027 session
+            progids = new string[] {"AeccXUiRoadway.AeccRoadwayApplication.13.9"};  // 2027
 #endif
 
             AcadApplication m_oAcadApp = null;
             try
             {
-                m_oAcadApp = System.Runtime.InteropServices.Marshal.GetActiveObject(m_sAcadProdID) as AcadApplication;
+                m_oAcadApp = GetActiveObject(m_sAcadProdID) as AcadApplication;
             }
             catch (COMException ex)
             {
@@ -173,7 +199,7 @@ namespace CivilConnection
 
             Utils.Log(string.Format("CivilApplication.Units started...", ""));
 
-#if (C2023 || C2022 || C2021)
+#if (C2027 || C2023 || C2022 || C2021)
             // 6.0.0 Change Revit Document units to match the Civil 3D Units
             if (du == Autodesk.AECC.Interop.Land.AeccDrawingUnitType.aeccDrawingUnitMeters)
             {

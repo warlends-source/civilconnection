@@ -53,6 +53,7 @@ The release numbers for the package correspond to the major release numbers of C
 
 **Note that CivilConnection and Civil 3D with different release numbers are not compatible.**
 
+* Civil 3D and Revit 2027 - CivilConnection 2027 - Autodesk2027.dll (.NET 10, Dynamo for Revit 4.1)
 * Civil 3D and Revit 2023 - CivilConnection 2023 - Autodesk2023.dll
 * Civil 3D and Revit 2022 - CivilConnection 2022 - Autodesk2022.dll
 * Civil 3D and Revit 2021 - CivilConnection 2021 - Autodesk2021.dll
@@ -60,6 +61,19 @@ The release numbers for the package correspond to the major release numbers of C
 * Civil 3D and Revit 2019 - CivilConnection 2019 - Autodesk2019.dll [End of Life]
 * Civil 3D and Revit 2018 - CivilConnection 2018 - Autodesk2018.dll [End of Life]
 * Civil 3D and Revit 2017 - CivilConnection 2017 - Autodesk2017.dll [End of Life]
+
+## Building for 2027
+Civil 3D 2027, Revit 2027 and Dynamo for Revit 4.1 run on .NET 10, so the 2027 build uses SDK-style projects that share the source of the legacy projects (compiled with the `C2027` symbol). It requires the .NET 10 SDK and local installs of Revit 2027 and Civil 3D 2027.
+
+```
+dotnet build Src/CivilConnection/2027/Autodesk2027/Autodesk2027.csproj -c Release
+dotnet build Src/CivilPython/2027/CivilPython2027.csproj -c Release
+```
+
+The projects look for the products in `C:\Program Files\Autodesk\Revit 2027` and `C:\Program Files\Autodesk\AutoCAD 2027`; pass `-p:RevitPath=...` and `-p:C3DPath=...` if they are installed elsewhere.
+
+* The CivilConnection build creates the Dynamo package in `bin\Release\CivilConnection2027` and copies it to `%AppData%\Dynamo\Dynamo Revit\4.1\packages` (add `-p:DeployPackage=false` to skip the copy).
+* The CivilPython build creates `bin\Release\CivilPython.bundle`. Copy that folder to `C:\ProgramData\Autodesk\ApplicationPlugins` so that Civil 3D 2027 can run the commands CivilConnection uses. Python scripting stays disabled in this release.
 
 ## License
 See [LICENSING.md](LICENSING.md)

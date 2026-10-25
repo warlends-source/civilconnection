@@ -140,7 +140,7 @@ namespace CivilConnection
                 // Foundation Slabs require that the profile curves are planar and horizontal
                 // The normal must be orthogonal to the profile, hence the only possible normal is the Z Axis
 
-#if (C2022 || C2023)
+#if (C2022 || C2023 || C2027)
                 floor = Floor.Create(doc, new System.Collections.Generic.List<CurveLoop>() {cl}, floorType.Id, level.Id);
 #else
                 floor = doc.Create.NewFoundationSlab(curveArray, floorType, level, structural, XYZ.BasisZ);
@@ -148,7 +148,7 @@ namespace CivilConnection
             }
             else
             {
-#if (C2022 || C2023)
+#if (C2022 || C2023 || C2027)
                 floor = Floor.Create(doc, new System.Collections.Generic.List<CurveLoop>() { cl }, floorType.Id, level.Id, structural, slopeArrow, slope);
 #else
                 // we assume the floor is not structural here, this may be a bad assumption
@@ -219,7 +219,7 @@ namespace CivilConnection
                 Autodesk.DesignScript.Geometry.Curve temp = Autodesk.DesignScript.Geometry.Line.ByBestFitThroughPoints(new Autodesk.DesignScript.Geometry.Point[] { origin, intersection });
 
                 PolyCurve flat = PolyCurve.ByJoinedCurves(outline.PullOntoPlane(Autodesk.DesignScript.Geometry.Plane.XY()
-                    .Offset(temp.StartPoint.Z)).Explode().Cast<Autodesk.DesignScript.Geometry.Curve>().ToList());
+                    .Offset(temp.StartPoint.Z)).Explode().Cast<Autodesk.DesignScript.Geometry.Curve>().ToList(), 0.001);
 
                 Autodesk.DesignScript.Geometry.Curve flatLine = temp.PullOntoPlane(Autodesk.DesignScript.Geometry.Plane.XY().Offset(temp.StartPoint.Z));
 
@@ -227,7 +227,7 @@ namespace CivilConnection
                 {
                     var f = Revit.Elements.Floor.ByOutlineTypeAndLevel(flat, floorType, level);
                     f.InternalElement.Parameters.Cast<Autodesk.Revit.DB.Parameter>()
-                        .First(x => x.Id.IntegerValue.Equals(Autodesk.Revit.DB.BuiltInParameter.FLOOR_PARAM_IS_STRUCTURAL))
+                        .First(x => x.Id.GetValue().Equals((int)Autodesk.Revit.DB.BuiltInParameter.FLOOR_PARAM_IS_STRUCTURAL))
                         .Set(structural ? 1 : 0);
 
                     plane.Dispose();

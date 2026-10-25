@@ -118,6 +118,36 @@ namespace CivilConnection.Robot
         }
 
         /// <summary>
+        /// Creates a section defined only by its properties (m2, m4, m3), for profiles that are not in the Robot database.
+        /// IY/WY refer to the strong axis.
+        /// </summary>
+        internal string CreateSectionByProperties(string name, double area, double iy, double iz, double ix, double wy, double wz, string materialName)
+        {
+            IRobotLabel label = Structure.Labels.Create(IRobotLabelType.I_LT_BAR_SECTION, name);
+            var data = (IRobotBarSectionData)label.Data;
+            data.Type = IRobotBarSectionType.I_BST_STANDARD;
+            data.ShapeType = IRobotBarSectionShapeType.I_BSST_UNKNOWN;
+            if (!string.IsNullOrEmpty(materialName)) data.MaterialName = materialName;
+            data.SetValue(IRobotBarSectionDataValue.I_BSDV_AX, area);
+            data.SetValue(IRobotBarSectionDataValue.I_BSDV_IY, iy);
+            data.SetValue(IRobotBarSectionDataValue.I_BSDV_IZ, iz);
+            data.SetValue(IRobotBarSectionDataValue.I_BSDV_IX, ix);
+            if (wy > 0) data.SetValue(IRobotBarSectionDataValue.I_BSDV_WY, wy);
+            if (wz > 0) data.SetValue(IRobotBarSectionDataValue.I_BSDV_WZ, wz);
+            Structure.Labels.Store(label);
+            return name;
+        }
+
+        /// <summary>
+        /// Section area (m2) as stored in Robot, to check a section label.
+        /// </summary>
+        internal double SectionArea(string name)
+        {
+            var data = (IRobotBarSectionData)Structure.Labels.Get(IRobotLabelType.I_LT_BAR_SECTION, name).Data;
+            return data.GetValue(IRobotBarSectionDataValue.I_BSDV_AX);
+        }
+
+        /// <summary>
         /// Uses a section from the Robot database when it exists (e.g. "W 310x52", "HEA 200").
         /// </summary>
         internal bool IsSectionAvailable(string name)
@@ -235,8 +265,27 @@ namespace CivilConnection.Robot
             return number;
         }
 
+        /// <summary>
+        /// Nodes whose elevation is within tolerance of the lowest node of the model.
+        /// </summary>
+        internal List<int> NodesAtMinimumZ(double tolerance)
+        {
+            var nodes = new List<(int Number, double Z)>();
+            IRobotCollection all = Structure.Nodes.GetAll();
+            for (int i = 1; i <= all.Count; i++)
+            {
+                var n = (IRobotNode)all.Get(i);
+                nodes.Add((n.Number, n.Z));
+            }
+            if (nodes.Count == 0) return new List<int>();
+            double zmin = nodes.Min(n => n.Z);
+            return nodes.Where(n => n.Z - zmin <= tolerance).Select(n => n.Number).ToList();
+        }
+
         internal void AssignSupport(IEnumerable<int> nodes, string supportName)
         {
+            if (ToText(nodes).Length == 0) return;
+
             RobotSelection sel = Structure.Selections.Create(IRobotObjectType.I_OT_NODE);
             sel.FromText(ToText(nodes));
             Structure.Nodes.SetLabel(sel, IRobotLabelType.I_LT_SUPPORT, supportName);
@@ -283,6 +332,9 @@ namespace CivilConnection.Robot
 
         internal void AddNodalForce(int caseNumber, IEnumerable<int> nodes, double fx, double fy, double fz, double mx, double my, double mz)
         {
+            // a record with an empty selection is useless and Robot may reject it
+            if (ToText(nodes).Length == 0) return;
+
             IRobotLoadRecord rec = NewRecord(caseNumber, IRobotLoadRecordType.I_LRT_NODE_FORCE);
             rec.SetValue((short)IRobotNodeForceRecordValues.I_NFRV_FX, fx);
             rec.SetValue((short)IRobotNodeForceRecordValues.I_NFRV_FY, fy);
@@ -295,6 +347,9 @@ namespace CivilConnection.Robot
 
         internal void AddBarUniformLoad(int caseNumber, IEnumerable<int> bars, double px, double py, double pz, bool local)
         {
+            // a record with an empty selection is useless and Robot may reject it
+            if (ToText(bars).Length == 0) return;
+
             IRobotLoadRecord rec = NewRecord(caseNumber, IRobotLoadRecordType.I_LRT_BAR_UNIFORM);
             rec.SetValue((short)IRobotBarUniformRecordValues.I_BURV_PX, px);
             rec.SetValue((short)IRobotBarUniformRecordValues.I_BURV_PY, py);
@@ -305,6 +360,9 @@ namespace CivilConnection.Robot
 
         internal void AddPanelUniformLoad(int caseNumber, IEnumerable<int> panels, double px, double py, double pz, bool local)
         {
+            // a record with an empty selection is useless and Robot may reject it
+            if (ToText(panels).Length == 0) return;
+
             IRobotLoadRecord rec = NewRecord(caseNumber, IRobotLoadRecordType.I_LRT_UNIFORM);
             rec.SetValue((short)IRobotUniformRecordValues.I_URV_PX, px);
             rec.SetValue((short)IRobotUniformRecordValues.I_URV_PY, py);

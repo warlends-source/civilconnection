@@ -283,6 +283,18 @@ namespace CivilConnection.Robot
         }
 
         /// <summary>
+        /// Assigns a support label to the lowest nodes of the model (e.g. the base of the columns).
+        /// </summary>
+        /// <param name="supportName">Support name.</param>
+        /// <param name="tolerance">Elevation tolerance in meters.</param>
+        /// <param name="waitFor">Any input that must be computed first (e.g. the geometry).</param>
+        /// <returns>The node numbers.</returns>
+        public IList<int> AssignSupportToLowestNodes(string supportName, double tolerance = 0.01, [DefaultArgument("null")] object waitFor = null)
+        {
+            return AssignSupport(Link.NodesAtMinimumZ(tolerance), supportName);
+        }
+
+        /// <summary>
         /// Assigns a support label to the nodes closest to the given points.
         /// </summary>
         /// <returns>The node numbers.</returns>
@@ -369,121 +381,76 @@ namespace CivilConnection.Robot
         #region Revit
 
         /// <summary>
-        /// Sends Revit structural elements to Robot through their analytical model.
-        /// Accepts physical elements (beams, columns, braces, floors, walls) or analytical members and panels.
-        /// Rectangular sections and materials with structural assets are created in Robot; other sections
-        /// are looked up by family type name in the Robot section database.
+        /// Collects the analytical members (beams, columns, braces) and analytical panels (floors, walls) of the active Revit document.
+        /// </summary>
+        /// <param name="members">Include analytical members.</param>
+        /// <param name="panels">Include analytical panels.</param>
+        /// <returns>Revit analytical elements.</returns>
+        public static IList<Revit.Elements.Element> RevitAnalyticalElements(bool members = true, bool panels = true)
+        {
+            DB.Document doc = DocumentManager.Instance.CurrentDBDocument;
+            var output = new List<Revit.Elements.Element>();
+            if (members)
+            {
+                output.AddRange(new DB.FilteredElementCollector(doc).OfClass(typeof(AnalyticalMember)).Select(e => Revit.Elements.ElementWrapper.ToDSType(e, true)));
+            }
+            if (panels)
+            {
+                output.AddRange(new DB.FilteredElementCollector(doc).OfClass(typeof(AnalyticalPanel)).Select(e => Revit.Elements.ElementWrapper.ToDSType(e, true)));
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// Collects the physical structural elements of the active Revit document: structural framing, structural columns,
+        /// floors and walls. Prefer RevitAnalyticalElements when the analytical model exists: physical location lines
+        /// usually do not meet at the joints, so the resulting Robot model is not connected.
+        /// </summary>
+        /// <returns>Revit elements.</returns>
+        public static IList<Revit.Elements.Element> RevitStructuralElements(bool framing = true, bool columns = true, bool floors = true, bool walls = true)
+        {
+            DB.Document doc = DocumentManager.Instance.CurrentDBDocument;
+            var categories = new List<DB.BuiltInCategory>();
+            if (framing) categories.Add(DB.BuiltInCategory.OST_StructuralFraming);
+            if (columns) categories.Add(DB.BuiltInCategory.OST_StructuralColumns);
+            if (floors) categories.Add(DB.BuiltInCategory.OST_Floors);
+            if (walls) categories.Add(DB.BuiltInCategory.OST_Walls);
+
+            var output = new List<Revit.Elements.Element>();
+            foreach (DB.BuiltInCategory bic in categories)
+            {
+                output.AddRange(new DB.FilteredElementCollector(doc).OfCategory(bic).WhereElementIsNotElementType().Select(e => Revit.Elements.ElementWrapper.ToDSType(e, true)));
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// Sends Revit structural elements to Robot. Uses the analytical model when it exists (analytical members and
+        /// panels, or the physical elements they belong to) and otherwise the physical geometry: location lines of beams
+        /// and braces, base to top of columns, top face of floors and straight structural walls.
+        /// Rectangular sections and materials with structural assets are created in Robot; other sections are looked up
+        /// by family type name in the Robot section database.
         /// </summary>
         /// <param name="elements">Revit elements.</param>
         /// <param name="defaultSectionName">Section used when the Revit type has no match in Robot.</param>
-        /// <param name="maxSegmentLength">Division of curved members, in model units.</param>
+        /// <param name="maxSegmentLength">Division of curved members and edges, in meters.</param>
         /// <param name="meshSize">Finite element size of panels in meters (0 = Robot default).</param>
-        /// <returns>Revit element ids with the Robot bar and panel numbers created for each.</returns>
-        [MultiReturn(new[] { "ElementIds", "Bars", "Panels", "Skipped" })]
+        /// <returns>Revit element ids with the Robot bars and panel created for each, how each was read, and the ids skipped.</returns>
+        [MultiReturn(new[] { "ElementIds", "Bars", "Panels", "Source", "Skipped" })]
         public Dictionary<string, object> FromRevitAnalytical(IList<Revit.Elements.Element> elements, string defaultSectionName = "", double maxSegmentLength = 1, double meshSize = 0)
         {
             DB.Document doc = DocumentManager.Instance.CurrentDBDocument;
-            var association = AnalyticalToPhysicalAssociationManager.GetAnalyticalToPhysicalAssociationManager(doc);
-
-            var ids = new List<long>();
-            var bars = new List<IList<int>>();
-            var panels = new List<int>();
-            var skipped = new List<long>();
-
-            foreach (Revit.Elements.Element e in elements)
-            {
-                DB.Element element = e.InternalElement;
-                DB.Element analytical = element as AnalyticalElement;
-                if (analytical == null)
-                {
-                    DB.ElementId aid = association?.GetAssociatedElementId(element.Id);
-                    if (aid != null && aid != DB.ElementId.InvalidElementId) analytical = doc.GetElement(aid);
-                }
-
-                if (analytical is AnalyticalMember member)
-                {
-                    string material = MaterialFromRevit(doc, member.MaterialId);
-                    string section = SectionFromRevit(doc, member.SectionTypeId, material, defaultSectionName);
-                    Curve curve = Revit.GeometryConversion.RevitToProtoCurve.ToProtoType(member.GetCurve(), true, null);
-                    ids.Add(element.Id.GetValue());
-                    bars.Add(CreateBars(new List<Curve> { curve }, section, material, maxSegmentLength)[0]);
-                    panels.Add(0);
-                }
-                else if (analytical is AnalyticalPanel panel)
-                {
-                    string material = MaterialFromRevit(doc, panel.MaterialId);
-                    double thickness = DB.UnitUtils.ConvertFromInternalUnits(panel.Thickness, DB.UnitTypeId.Meters);
-                    string thicknessName = string.Format("TH{0:0}_{1}", thickness * 1000, material);
-                    if (Link.Structure.Labels.Exist(IRobotLabelType.I_LT_PANEL_THICKNESS, thicknessName) == 0)
-                    {
-                        Link.CreatePanelThickness(thicknessName, thickness, material, 0);
-                    }
-
-                    var outline = new List<Curve>();
-                    foreach (DB.Curve c in panel.GetOuterContour())
-                    {
-                        outline.Add(Revit.GeometryConversion.RevitToProtoCurve.ToProtoType(c, true, null));
-                    }
-                    ids.Add(element.Id.GetValue());
-                    bars.Add(new List<int>());
-                    panels.Add(Link.CreatePanel(Contour(PolyCurve.ByJoinedCurves(outline, 0.001, false, 0), maxSegmentLength), thicknessName, meshSize));
-                }
-                else
-                {
-                    skipped.Add(element.Id.GetValue());
-                }
-            }
+            var sender = new RevitToRobot(doc, Link, xyz => ToRobot(Revit.GeometryConversion.GeometryPrimitiveConverter.ToPoint(xyz, true)));
+            sender.Send(elements.Select(e => e.InternalElement.Id), defaultSectionName, maxSegmentLength, meshSize);
 
             return new Dictionary<string, object>
             {
-                { "ElementIds", ids },
-                { "Bars", bars },
-                { "Panels", panels },
-                { "Skipped", skipped }
+                { "ElementIds", sender.ElementIds },
+                { "Bars", sender.Bars },
+                { "Panels", sender.Panels },
+                { "Source", sender.Source },
+                { "Skipped", sender.Skipped }
             };
-        }
-
-        private string MaterialFromRevit(DB.Document doc, DB.ElementId materialId)
-        {
-            var material = doc.GetElement(materialId) as DB.Material;
-            if (material == null) return "";
-
-            string name = material.Name;
-            if (Link.Structure.Labels.Exist(IRobotLabelType.I_LT_MATERIAL, name) != 0) return name;
-
-            var asset = doc.GetElement(material.StructuralAssetId) as DB.PropertySetElement;
-            DB.StructuralAsset sa = asset?.GetStructuralAsset();
-            if (sa == null) return "";
-
-            double e = DB.UnitUtils.ConvertFromInternalUnits(sa.YoungModulus.X, DB.UnitTypeId.Pascals);
-            double nu = sa.PoissonRatio.X;
-            double density = DB.UnitUtils.ConvertFromInternalUnits(sa.Density, DB.UnitTypeId.KilogramsPerCubicMeter);
-            IRobotMaterialType type = sa.StructuralAssetClass == DB.StructuralAssetClass.Metal ? IRobotMaterialType.I_MT_STEEL
-                : sa.StructuralAssetClass == DB.StructuralAssetClass.Wood ? IRobotMaterialType.I_MT_TIMBER
-                : sa.StructuralAssetClass == DB.StructuralAssetClass.Concrete ? IRobotMaterialType.I_MT_CONCRETE
-                : IRobotMaterialType.I_MT_OTHER;
-
-            return Link.CreateMaterial(name, type, e, nu, density * 9.80665);
-        }
-
-        private string SectionFromRevit(DB.Document doc, DB.ElementId typeId, string material, string defaultSection)
-        {
-            var symbol = doc.GetElement(typeId) as DB.FamilySymbol;
-            if (symbol == null) return defaultSection;
-
-            if (symbol.GetStructuralSection() is StructuralSectionRectangular rect)
-            {
-                double b = DB.UnitUtils.ConvertFromInternalUnits(rect.Width, DB.UnitTypeId.Meters);
-                double h = DB.UnitUtils.ConvertFromInternalUnits(rect.Height, DB.UnitTypeId.Meters);
-                string name = string.Format("R{0:0}x{1:0}", b * 1000, h * 1000);
-                if (Link.Structure.Labels.Exist(IRobotLabelType.I_LT_BAR_SECTION, name) == 0)
-                {
-                    Link.CreateRectangularSection(name, b, h, material);
-                }
-                return name;
-            }
-
-            return Link.IsSectionAvailable(symbol.Name) ? symbol.Name : defaultSection;
         }
 
         #endregion

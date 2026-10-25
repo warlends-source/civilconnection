@@ -1,0 +1,447 @@
+{
+  "Uuid": "230e8508-2fc6-45b7-a46c-21b26451bf0c",
+  "IsCustomNode": false,
+  "Description": "Envia a estrutura do Revit 2027 para o Robot 2027, aplica peso proprio e sobrecarga, calcula e le as reacoes.",
+  "Name": "Revit para Robot",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "2bb5deba6d4844088acea6074d2a7b41",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6d6d483925cb471bbc99f85003a8ee43",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3d3c380e81e34b53843fef72a55a84f0",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "db04159efd964b40b54d697d7b652ae6",
+          "Name": "",
+          "Description": "Value of expression at line 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bb7b636f71f14e76893ce2994186497e",
+          "Name": "",
+          "Description": "Value of expression at line 4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7f852b5415864a80b2d5162b892d5623",
+          "Name": "",
+          "Description": "Value of expression at line 5",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "22b885bc57b04566bb36c0f1324c0452",
+          "Name": "",
+          "Description": "Value of expression at line 6",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bd45632dd2fa4e06aa1eb52a33dabd40",
+          "Name": "",
+          "Description": "Value of expression at line 7",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3d78c958240f496bb6bed2b26e15f4c5",
+          "Name": "",
+          "Description": "Value of expression at line 8",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "67cd99b1fbc44690b72ec23eace77172",
+          "Name": "",
+          "Description": "Value of expression at line 9",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4bc9ed3f6d674398be87a763ad9747e4",
+          "Name": "",
+          "Description": "Value of expression at line 10",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f7fd558a2f1f4784a3f4aad442850059",
+          "Name": "",
+          "Description": "Value of expression at line 11",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "955af2fc8d964a1cbb029408adf21d84",
+          "Name": "",
+          "Description": "Value of expression at line 12",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e12c045d665146678686f1886b30a08e",
+          "Name": "",
+          "Description": "Value of expression at line 13",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c087f030650445659a85e53e220332d1",
+          "Name": "",
+          "Description": "Value of expression at line 14",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "024658862bb24e87aeab0b695486c32a",
+          "Name": "",
+          "Description": "Value of expression at line 15",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c5d0be61487c4b9cb6e75d21b32403bc",
+          "Name": "",
+          "Description": "Value of expression at line 16",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d6e94c06ae354a86bcf94a16e2075170",
+          "Name": "",
+          "Description": "Value of expression at line 17",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6f0ebfcca6414ffaa86bec11b7204a54",
+          "Name": "",
+          "Description": "Value of expression at line 18",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3821d744c5584b79809b503302236297",
+          "Name": "",
+          "Description": "Value of expression at line 19",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "407dcef116bd49d493fa62b5534f1173",
+          "Name": "",
+          "Description": "Value of expression at line 20",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d233dd3fdf454623a9ece6a60a063ac4",
+          "Name": "",
+          "Description": "Value of expression at line 21",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d03b6c55cd6a4baf87d9400afbefdbf3",
+          "Name": "",
+          "Description": "Value of expression at line 22",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "// PARAMETROS (abra o Robot com um projeto qualquer antes de executar)\n// usarAnalitico = true usa o modelo analitico (recomendado: barras conectadas nos nos)\nusarAnalitico = true;\ncalcular = true;\n// sobrecarga nas lajes em Pa (N/m2), negativa = para baixo\ncargaLaje = -3000;\n// apoio engastado nos nos ate esta distancia (m) acima do no mais baixo\ntoleranciaApoio = 0.01;\n// FLUXO\nrobot = CivilConnection.Robot.RobotModel.Connect(true, \"Shell\", -1, null);\nelementos = usarAnalitico ? CivilConnection.Robot.RobotModel.RevitAnalyticalElements(true, true) : CivilConnection.Robot.RobotModel.RevitStructuralElements(true, true, true, false);\nenvio = robot.FromRevitAnalytical(elementos, \"\", 0.5, 0.5);\nengaste = robot.CreateSupport(\"ENGASTE\", true, true, true, true, true, true);\napoios = robot.AssignSupportToLowestNodes(engaste, toleranciaApoio, envio);\nlimpar = robot.DeleteAllCases(apoios);\ncasoG = robot.CreateLoadCase(1, \"G - peso proprio\", \"Permanent\", limpar);\npp = robot.AddSelfWeight(casoG, 1);\ncasoQ = robot.CreateLoadCase(2, \"Q - sobrecarga\", \"Exploatation\", pp);\nsobrecarga = robot.AddPanelUniformLoads(casoQ, envio[\"Panels\"], 0, 0, cargaLaje, false);\nelu = robot.CreateCombination(3, \"ELU 1.4G + 1.4Q\", [pp, sobrecarga], [1.4, 1.4], \"ULS\");\nmalha = robot.GenerateMesh(elu);\ncalculado = robot.Calculate(calcular, malha);\nreacoesG = robot.NodeReactions(apoios, pp, calculado);\npesoProprio_kN = Math.Sum(reacoesG[\"FZ\"]) / 1000;\nreacoesELU = robot.NodeReactions(apoios, elu, calculado);\nsomaFZ_ELU_kN = Math.Sum(reacoesELU[\"FZ\"]) / 1000;\nfim = robot.EndSession(somaFZ_ELU_kN);"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "1d2572dc2af84141bbaee7c9728ea018",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "fcdeb9c225f24b45a2cdb6cb09a8953a",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "355b6215f10349128c8f3839de13aa27",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "ea39b7f9221745feaf76aee99386d591",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "f463d2c259e74e69aa54de5093f8d216",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7b8de5c9913f47f48b1637c84a9fcce4",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "8cb13b0ec5f2481d86b4a61f084920a8",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "05c5a3f88b274753aa4cf4951067f292",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9c28faf3f98e4fc3b4ef127a08c8709a",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "bd45632dd2fa4e06aa1eb52a33dabd40",
+      "End": "fcdeb9c225f24b45a2cdb6cb09a8953a",
+      "Id": "84d8b24fe526433488e1c28f48252fd8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3821d744c5584b79809b503302236297",
+      "End": "f463d2c259e74e69aa54de5093f8d216",
+      "Id": "989b8bfa565f4d98920fbf60b35be15c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d233dd3fdf454623a9ece6a60a063ac4",
+      "End": "05c5a3f88b274753aa4cf4951067f292",
+      "Id": "9eaa1ee7fea643f4a6533ea7b48a2dd6",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "CivilConnection2027",
+      "Version": "7.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "2bb5deba6d4844088acea6074d2a7b41"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "4.1.1.5050",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "2bb5deba6d4844088acea6074d2a7b41",
+        "Name": "CivilConnection Robot",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 0.0,
+        "Y": 0.0
+      },
+      {
+        "Id": "1d2572dc2af84141bbaee7c9728ea018",
+        "Name": "Watch: envio",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 0.0
+      },
+      {
+        "Id": "ea39b7f9221745feaf76aee99386d591",
+        "Name": "Watch: pesoProprio_kN",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 260.0
+      },
+      {
+        "Id": "8cb13b0ec5f2481d86b4a61f084920a8",
+        "Name": "Watch: somaFZ_ELU_kN",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 520.0
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "aeb8511c593145bba47961201513fb09",
+        "Title": "CivilConnection 2027 - Revit para Robot",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 0.0,
+        "Top": -260.0,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 60.0,
+    "Y": 320.0,
+    "Zoom": 0.6
+  }
+}

@@ -80,11 +80,13 @@ When Robot Structural Analysis Professional 2027 is installed, the 2027 package 
 
 * **Connection**: `RobotModel.Connect` attaches to the running Robot session (open Robot with a project first). `lengthUnitToMeters` converts Dynamo units to meters (negative = read from the Revit document) and `origin` moves the model close to (0,0,0), which matters for Civil 3D coordinates.
 * **Civil 3D to Robot**: `BarsFromFeaturelines`, `BarsFromAlignment` and `DeckPanelsBetweenFeaturelines`, plus generic `CreateNodes`, `CreateBars` and `CreatePanels` for any Dynamo geometry (e.g. `CivilSurface.GetTrianglesSurfaces`).
-* **Revit to Robot**: `FromRevitAnalytical` sends analytical members and panels (or the physical elements they belong to), creating rectangular sections and materials from the Revit structural assets.
+* **Revit to Robot**: `FromRevitAnalytical` sends analytical members and panels (`RevitAnalyticalElements`), or the physical elements they belong to. Without an analytical model it falls back to the physical geometry (`RevitStructuralElements`): location lines of beams and braces, base to top of columns, top face of floors and straight structural walls. Materials come from the Revit structural assets; sections are solid rectangles, Robot database sections of the same name, or sections defined by the properties of the Revit type or, when the family has none, computed from the member cross-section. Physical location lines rarely meet at the joints, so use the analytical model for analysis.
 * **Labels, loads and combinations**: `CreateMaterial`, `CreateRectangularSection`, `CreatePanelThickness` (with elastic foundation), `CreateSupport`, `CreateLoadCase`, `AddSelfWeight`, `AddNodalForces`, `AddBarUniformLoads`, `AddPanelUniformLoads`, `CreateCombination`, `GenerateMesh`, `Calculate`, `SaveAs`.
 * **Results**: `NodeDisplacements`, `NodeReactions`, `BarForces`, `PanelForces` and `NearestNodes`.
 
-Loads and results are in SI units (N, m, Pa). Every run of a graph adds objects to the Robot model, so use `Connect` with `newProject = true` to rebuild it from scratch. Connect `waitFor` inputs to control the order of the steps.
+Loads and results are in SI units (N, m, Pa). Every run of a graph adds objects to the Robot model, so use `Connect` with `newProject = true` to rebuild it from scratch. Connect `waitFor` inputs to control the order of the steps. Bar orientation (section rotation) and member releases are not transferred yet.
+
+Example graphs: [Examples/Dynamo/2027](Examples/Dynamo/2027).
 
 ## License
 See [LICENSING.md](LICENSING.md)

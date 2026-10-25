@@ -1,0 +1,528 @@
+{
+  "Uuid": "8bb4151d-6562-43cb-b70c-c05f2ac25afc",
+  "IsCustomNode": false,
+  "Description": "Cria no Robot 2027 o tabuleiro entre duas linhas de feicao de um corredor do Civil 3D 2027, com apoios, cargas, calculo e reacoes.",
+  "Name": "Civil 3D para Robot",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "e65611cb21dc46bea41e4b46314b97ad",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2daec077940c4fbbb6907494a23e26bf",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "346db2b432dc4cb69a2504094a172d00",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "53c948197f4247b0b8a9d6bde8e8b65c",
+          "Name": "",
+          "Description": "Value of expression at line 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d6a0e073d84a4c38ab151272f144457d",
+          "Name": "",
+          "Description": "Value of expression at line 4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0b701e7641f945eaa14161735e2c7b6c",
+          "Name": "",
+          "Description": "Value of expression at line 5",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9c89a57b9e984bd3b7bd34f6e7c88354",
+          "Name": "",
+          "Description": "Value of expression at line 6",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f512343113474b8196e5fdf7a88f4cb3",
+          "Name": "",
+          "Description": "Value of expression at line 7",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f29259bc553d4648b319cb6dad0c9ea3",
+          "Name": "",
+          "Description": "Value of expression at line 8",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3cc8e51271a44d919009ffcdfcf14d3a",
+          "Name": "",
+          "Description": "Value of expression at line 9",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bbdcb2c6d1e24aed95209ad647c3a94f",
+          "Name": "",
+          "Description": "Value of expression at line 10",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a7124f6c421b4365910b7b9573efd4fd",
+          "Name": "",
+          "Description": "Value of expression at line 11",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ba42a0958f474b748e768890590fcb8c",
+          "Name": "",
+          "Description": "Value of expression at line 12",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9435b39b72e4457eaefff729bfc36b48",
+          "Name": "",
+          "Description": "Value of expression at line 13",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d63eb09a552b45c39c43489f923e1432",
+          "Name": "",
+          "Description": "Value of expression at line 14",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "857e5e84f9304088aeff1788e56040ce",
+          "Name": "",
+          "Description": "Value of expression at line 15",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ad320cbdd67148148d0a21fd1be10879",
+          "Name": "",
+          "Description": "Value of expression at line 16",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "044dc8d735bc440e88bf4761a61630bf",
+          "Name": "",
+          "Description": "Value of expression at line 17",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bc1af7e4f4ab4da98184d72e5b5ba709",
+          "Name": "",
+          "Description": "Value of expression at line 18",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dc56ee2e48544e26a749635bdc42418f",
+          "Name": "",
+          "Description": "Value of expression at line 19",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "503db25f9a40465199d65c7be860ea8f",
+          "Name": "",
+          "Description": "Value of expression at line 20",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f29847c53b724ba9b9bb106d4de8551e",
+          "Name": "",
+          "Description": "Value of expression at line 21",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7177b134ea574c478d925875d05267f6",
+          "Name": "",
+          "Description": "Value of expression at line 22",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "32d9a71c9e134370b42a2768f5bc57da",
+          "Name": "",
+          "Description": "Value of expression at line 23",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4f8a29e79c2142678b3ae4c4d4e7f5dd",
+          "Name": "",
+          "Description": "Value of expression at line 24",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e7e6b006039249b9ba88d4425ff0af4c",
+          "Name": "",
+          "Description": "Value of expression at line 25",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ef307a7f9919446392e487a0a3e06964",
+          "Name": "",
+          "Description": "Value of expression at line 26",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "602b860b661841cabde68dddde48fa30",
+          "Name": "",
+          "Description": "Value of expression at line 27",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b95d02f7a3634008aa545867ffdb8096",
+          "Name": "",
+          "Description": "Value of expression at line 28",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "29608efa0a5646fd8578a1e57b3a432a",
+          "Name": "",
+          "Description": "Value of expression at line 29",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f0daececa23443e5adec073c34804527",
+          "Name": "",
+          "Description": "Value of expression at line 30",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fc610f0745354a71b49b6c72d6033ac5",
+          "Name": "",
+          "Description": "Value of expression at line 31",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "// PARAMETROS (Civil 3D 2027 com o desenho do corredor aberto, CivilPython instalado e Robot aberto)\ncalcular = true;\n// codigo das linhas de feicao dos bordos do tabuleiro (veja a lista 'codigos')\ncodigoBordo = \"ETW\";\n// comprimento dos paineis ao longo do bordo e distancia entre apoios, em unidades do Civil 3D\npasso = 5;\nvao = 30;\n// fator de unidade do desenho para metros (1 = desenho em metros)\nunidadeParaMetro = 1;\n// FLUXO\ncivil = CivilConnection.CivilApplication();\ndocumento = civil.GetDocuments()[0];\ncorredor = documento.GetCorridors()[0];\ncodigos = List.UniqueItems(List.Flatten(corredor.GetFeaturelines(), -1).Code);\nbordos = List.Flatten(corredor.GetFeaturelinesByCode(codigoBordo), -1);\norigem = bordos[0].Curve.StartPoint;\nrobot = CivilConnection.Robot.RobotModel.Connect(true, \"Shell\", unidadeParaMetro, origem);\nconcreto = robot.CreateMaterial(\"C35\", 29.4e9, 0.2, 25000, \"Concrete\");\nlaje = robot.CreatePanelThickness(\"LAJE 25\", 0.25, concreto, 0);\nnApoios = Math.Ceiling(bordos[0].Curve.Length / vao) + 1;\nt = 0..1..#nApoios;\npontosApoio = List.Flatten([bordos[0].Curve.PointAtParameter(t), bordos[1].Curve.PointAtParameter(t)], -1);\napoio = robot.CreateSupport(\"APOIO\", true, true, true, false, false, false);\napoios = robot.AssignSupportAtPoints(pontosApoio, apoio);\npaineis = robot.DeckPanelsBetweenFeaturelines(bordos[0], bordos[1], laje, passo, 0.5);\nlimpar = robot.DeleteAllCases(paineis);\ncasoG = robot.CreateLoadCase(1, \"G - peso proprio\", \"Permanent\", limpar);\npp = robot.AddSelfWeight(casoG, 1);\ncasoQ = robot.CreateLoadCase(2, \"Q - multidao 5 kPa\", \"Exploatation\", pp);\nq = robot.AddPanelUniformLoads(casoQ, paineis, 0, 0, -5000, false);\nelu = robot.CreateCombination(3, \"ELU 1.35G + 1.5Q\", [pp, q], [1.35, 1.5], \"ULS\");\nmalha = robot.GenerateMesh(elu);\ncalculado = robot.Calculate(calcular, malha);\nreacoes = robot.NodeReactions(apoios, elu, calculado);\nsomaFZ_ELU_kN = Math.Sum(reacoes[\"FZ\"]) / 1000;\nfim = robot.EndSession(somaFZ_ELU_kN);"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "d6fd9bb900034e78a8ec92e32f6cb81e",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "d14313d2d7a742318ae5e0658a856800",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "59ca2a31fafa488389d275b39f3125cf",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "1e87d8cb972c4a09a678d24f70277fe4",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "51d1a62795aa4ceab4f5948e4b9bb384",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c9c3f8ca0911488ea3690239cacdd23b",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "ae8e11c9d4d3442ab1e536a746b07423",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "833f2f7dee1741cb97955c19898d365b",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "17cfbf02972d430183e7e0aaa6517d89",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "3cc8e51271a44d919009ffcdfcf14d3a",
+      "End": "d14313d2d7a742318ae5e0658a856800",
+      "Id": "1a98d043a6b244d293796dbd796c83bc",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "503db25f9a40465199d65c7be860ea8f",
+      "End": "51d1a62795aa4ceab4f5948e4b9bb384",
+      "Id": "fdfa97cdcb6443ab8e4a58a6c5c5aac4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f0daececa23443e5adec073c34804527",
+      "End": "833f2f7dee1741cb97955c19898d365b",
+      "Id": "26f4e067824745c194f1d4114b318d20",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "CivilConnection2027",
+      "Version": "7.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e65611cb21dc46bea41e4b46314b97ad"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "4.1.1.5050",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "e65611cb21dc46bea41e4b46314b97ad",
+        "Name": "CivilConnection Robot",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 0.0,
+        "Y": 0.0
+      },
+      {
+        "Id": "d6fd9bb900034e78a8ec92e32f6cb81e",
+        "Name": "Watch: codigos",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 0.0
+      },
+      {
+        "Id": "1e87d8cb972c4a09a678d24f70277fe4",
+        "Name": "Watch: paineis",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 260.0
+      },
+      {
+        "Id": "ae8e11c9d4d3442ab1e536a746b07423",
+        "Name": "Watch: somaFZ_ELU_kN",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 520.0
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "7117484bd6c94293a711def6e50a3dd1",
+        "Title": "CivilConnection 2027 - Civil 3D para Robot",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 0.0,
+        "Top": -260.0,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 60.0,
+    "Y": 320.0,
+    "Zoom": 0.6
+  }
+}

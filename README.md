@@ -73,7 +73,7 @@ dotnet build Src/CivilPython/2027/CivilPython2027.csproj -c Release
 The projects look for the products in `C:\Program Files\Autodesk\Revit 2027` and `C:\Program Files\Autodesk\AutoCAD 2027`; pass `-p:RevitPath=...` and `-p:C3DPath=...` if they are installed elsewhere.
 
 * The CivilConnection build creates the Dynamo package in `bin\Release\CivilConnection2027` and copies it to `%AppData%\Dynamo\Dynamo Revit\4.1\packages` (add `-p:DeployPackage=false` to skip the copy).
-* The CivilPython build creates `bin\Release\CivilPython.bundle`. Copy that folder to `C:\ProgramData\Autodesk\ApplicationPlugins` so that Civil 3D 2027 can run the commands CivilConnection uses. Python scripting stays disabled in this release.
+* The CivilPython build creates `bin\Release\CivilPython.bundle`. Copy that folder to `%APPDATA%\Autodesk\ApplicationPlugins` (or `C:\Program Files\Autodesk\ApplicationPlugins` for all users) so that Civil 3D 2027 can run the commands CivilConnection uses. Civil 3D 2027 does not scan `C:\ProgramData\Autodesk\ApplicationPlugins`. Python scripting stays disabled in this release.
 
 ## Robot Structural Analysis (2027)
 When Robot Structural Analysis Professional 2027 is installed, the 2027 package also contains the `CivilConnection.Robot.RobotModel` nodes, which drive Robot through its COM API (`-p:RobotPath=...` points the build to another install folder; `-p:WithRobot=false` leaves the nodes out).

@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- The Civil 3D 2027 autoloader ignores bundles without ProductCode/UpgradeCode -->
 <ApplicationPackage SchemaVersion="1.0"
+                    AppVersion="2027.0.0"
+                    ProductCode="{6F2B8E1C-3D7A-4C59-9B21-7E4A2D9C0F27}"
+                    UpgradeCode="{A3C5D7E9-1B2F-4A6C-8D0E-5F7B9C1D3E52}"
                     AutodeskProduct="AutoCAD"
                     ProductType="Application"
-                    Name="CivilPython">
-  <CompanyDetails Name="" Phone=" " Url="" Email="" />
-  <!-- R26.0 = Civil 3D 2027. This build targets .NET 10 and does not load in earlier releases. -->
-  <RuntimeRequirements SeriesMax="R26.0"
-                       SeriesMin="R26.0"
-                       Platform="Civil3D"
-                       OS="Win64" />
+                    Name="CivilPython"
+                    Description="Commands used by CivilConnection to exchange data with Revit"
+                    Author="Autodesk">
+  <CompanyDetails Name="Autodesk" Url="https://github.com/Autodesk/civilconnection" />
   <Components>
+    <!-- R26.0 = Civil 3D 2027. This build targets .NET 10 and does not load in earlier releases. -->
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
     <ComponentEntry AppName="CivilPython"
+                    AppType=".NET"
                     Version="2027.0"
                     ModuleName="./Contents/2027/CivilPython.dll"
                     AppDescription="Commands used by CivilConnection to exchange data with Revit"
                     LoadOnCommandInvocation="True" LoadOnRequest="True">
-      <Commands>
+      <Commands GroupName="CIVILPYTHON">
         <Command Local="Python" Global="Python" />
         <Command Local="-python" Global="-python" />
         <Command Local="-replacesolid" Global="-replacesolid" />

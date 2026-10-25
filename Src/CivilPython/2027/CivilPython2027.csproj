@@ -46,7 +46,7 @@
     <Reference Include="AeccPressurePipesMgd" HintPath="$(C3DPath)\C3D\AeccPressurePipesMgd.dll" Private="false" />
   </ItemGroup>
 
-  <!-- Assemble CivilPython.bundle (copy it to C:\ProgramData\Autodesk\ApplicationPlugins to install) -->
+  <!-- Assemble CivilPython.bundle (copy it to %APPDATA%\Autodesk\ApplicationPlugins to install) -->
   <Target Name="CreateBundle" AfterTargets="Build">
     <PropertyGroup>
       <BundleDir>$(OutDir)CivilPython.bundle\</BundleDir>

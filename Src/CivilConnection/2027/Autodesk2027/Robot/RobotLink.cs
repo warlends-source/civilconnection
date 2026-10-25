@@ -282,6 +282,99 @@ namespace CivilConnection.Robot
             return nodes.Where(n => n.Z - zmin <= tolerance).Select(n => n.Number).ToList();
         }
 
+        /// <summary>
+        /// Splits every bar that has nodes lying on it (within 1 mm, away from its ends), so that members meeting
+        /// at mid-span are connected. Sub-bars keep the section and material of the original bar.
+        /// </summary>
+        /// <returns>Number of bars that were split.</returns>
+        internal int SplitBarsAtNodes()
+        {
+            var nodes = new List<(int N, double X, double Y, double Z)>();
+            IRobotCollection allNodes = Structure.Nodes.GetAll();
+            for (int i = 1; i <= allNodes.Count; i++)
+            {
+                var n = (IRobotNode)allNodes.Get(i);
+                nodes.Add((n.Number, n.X, n.Y, n.Z));
+            }
+            var byNumber = nodes.ToDictionary(n => n.N);
+
+            var bars = new List<(int N, int A, int B, string Section, string Material)>();
+            IRobotCollection allBars = Structure.Bars.GetAll();
+            for (int i = 1; i <= allBars.Count; i++)
+            {
+                var b = (IRobotBar)allBars.Get(i);
+                string sec = b.HasLabel(IRobotLabelType.I_LT_BAR_SECTION) != 0 ? b.GetLabelName(IRobotLabelType.I_LT_BAR_SECTION) : "";
+                string mat = b.HasLabel(IRobotLabelType.I_LT_MATERIAL) != 0 ? b.GetLabelName(IRobotLabelType.I_LT_MATERIAL) : "";
+                bars.Add((b.Number, b.StartNode, b.EndNode, sec, mat));
+            }
+
+            int split = 0;
+            foreach (var bar in bars)
+            {
+                var a = byNumber[bar.A];
+                var b = byNumber[bar.B];
+                double dx = b.X - a.X, dy = b.Y - a.Y, dz = b.Z - a.Z;
+                double len2 = dx * dx + dy * dy + dz * dz;
+                if (len2 < 1e-12) continue;
+                double len = Math.Sqrt(len2);
+
+                var inner = new List<(double T, int N)>();
+                foreach (var n in nodes)
+                {
+                    if (n.N == bar.A || n.N == bar.B) continue;
+                    double t = ((n.X - a.X) * dx + (n.Y - a.Y) * dy + (n.Z - a.Z) * dz) / len2;
+                    if (t * len <= NodeTolerance || (1 - t) * len <= NodeTolerance) continue;
+                    double px = a.X + t * dx - n.X, py = a.Y + t * dy - n.Y, pz = a.Z + t * dz - n.Z;
+                    if (px * px + py * py + pz * pz <= NodeTolerance * NodeTolerance) inner.Add((t, n.N));
+                }
+                if (inner.Count == 0) continue;
+
+                Structure.Bars.Delete(bar.N);
+                var chain = new List<int> { bar.A };
+                chain.AddRange(inner.OrderBy(x => x.T).Select(x => x.N));
+                chain.Add(bar.B);
+                for (int k = 0; k < chain.Count - 1; k++)
+                {
+                    int number = Structure.Bars.FreeNumber;
+                    Structure.Bars.Create(number, chain[k], chain[k + 1]);
+                    var nb = (IRobotBar)Structure.Bars.Get(number);
+                    if (bar.Section.Length > 0) nb.SetLabel(IRobotLabelType.I_LT_BAR_SECTION, bar.Section);
+                    if (bar.Material.Length > 0) nb.SetLabel(IRobotLabelType.I_LT_MATERIAL, bar.Material);
+                }
+                split++;
+            }
+            return split;
+        }
+
+        /// <summary>
+        /// Lower nodes of vertical bars (columns) that are not connected to any other bar.
+        /// </summary>
+        internal List<int> ColumnBaseNodes()
+        {
+            var z = new Dictionary<int, double>();
+            IRobotCollection allNodes = Structure.Nodes.GetAll();
+            for (int i = 1; i <= allNodes.Count; i++)
+            {
+                var n = (IRobotNode)allNodes.Get(i);
+                z[n.Number] = n.Z;
+            }
+
+            var use = new Dictionary<int, int>();
+            var lower = new List<int>();
+            IRobotCollection allBars = Structure.Bars.GetAll();
+            for (int i = 1; i <= allBars.Count; i++)
+            {
+                var b = (IRobotBar)allBars.Get(i);
+                use[b.StartNode] = use.TryGetValue(b.StartNode, out int u1) ? u1 + 1 : 1;
+                use[b.EndNode] = use.TryGetValue(b.EndNode, out int u2) ? u2 + 1 : 1;
+                if (b.Length > 0 && Math.Abs(z[b.EndNode] - z[b.StartNode]) / b.Length > 0.99)
+                {
+                    lower.Add(z[b.StartNode] < z[b.EndNode] ? b.StartNode : b.EndNode);
+                }
+            }
+            return lower.Where(n => use[n] == 1).Distinct().ToList();
+        }
+
         internal void AssignSupport(IEnumerable<int> nodes, string supportName)
         {
             if (ToText(nodes).Length == 0) return;

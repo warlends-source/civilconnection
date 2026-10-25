@@ -1,5 +1,5 @@
 {
-  "Uuid": "8bb4151d-6562-43cb-b70c-c05f2ac25afc",
+  "Uuid": "ecc718ad-d1c7-4d7d-8e08-d2744cb20bba",
   "IsCustomNode": false,
   "Description": "Cria no Robot 2027 o tabuleiro entre duas linhas de feicao de um corredor do Civil 3D 2027, com apoios, cargas, calculo e reacoes.",
   "Name": "Civil 3D para Robot",
@@ -11,12 +11,12 @@
   "Nodes": [
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "Id": "e65611cb21dc46bea41e4b46314b97ad",
+      "Id": "0628acc25e3f43988d79171a9c29bac5",
       "NodeType": "CodeBlockNode",
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "2daec077940c4fbbb6907494a23e26bf",
+          "Id": "c8326130bbca44d38b24f6babaa655ba",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -25,7 +25,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "346db2b432dc4cb69a2504094a172d00",
+          "Id": "6ec79a75dc2e42359f1a9b595cb90508",
           "Name": "",
           "Description": "Value of expression at line 2",
           "UsingDefaultValue": false,
@@ -34,7 +34,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "53c948197f4247b0b8a9d6bde8e8b65c",
+          "Id": "858f455492f3409a9d5e42129fd9a452",
           "Name": "",
           "Description": "Value of expression at line 3",
           "UsingDefaultValue": false,
@@ -43,7 +43,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d6a0e073d84a4c38ab151272f144457d",
+          "Id": "041edfd6263c4b49ab9053fd0474bd93",
           "Name": "",
           "Description": "Value of expression at line 4",
           "UsingDefaultValue": false,
@@ -52,7 +52,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "0b701e7641f945eaa14161735e2c7b6c",
+          "Id": "e229409f23f4407daeb33022112f8270",
           "Name": "",
           "Description": "Value of expression at line 5",
           "UsingDefaultValue": false,
@@ -61,7 +61,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "9c89a57b9e984bd3b7bd34f6e7c88354",
+          "Id": "fc1b93feae9a455bacb7f012cc7d1071",
           "Name": "",
           "Description": "Value of expression at line 6",
           "UsingDefaultValue": false,
@@ -70,7 +70,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "f512343113474b8196e5fdf7a88f4cb3",
+          "Id": "ff420453879f4b3cba47229f60a6c03e",
           "Name": "",
           "Description": "Value of expression at line 7",
           "UsingDefaultValue": false,
@@ -79,7 +79,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "f29259bc553d4648b319cb6dad0c9ea3",
+          "Id": "d4535e9ab3f446ae8cdebb0eb9d05f36",
           "Name": "",
           "Description": "Value of expression at line 8",
           "UsingDefaultValue": false,
@@ -88,7 +88,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "3cc8e51271a44d919009ffcdfcf14d3a",
+          "Id": "5afc2c05734f4d88bf49879242fe7d36",
           "Name": "",
           "Description": "Value of expression at line 9",
           "UsingDefaultValue": false,
@@ -97,7 +97,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "bbdcb2c6d1e24aed95209ad647c3a94f",
+          "Id": "424813687e8846e3b9772bd9557576f6",
           "Name": "",
           "Description": "Value of expression at line 10",
           "UsingDefaultValue": false,
@@ -106,7 +106,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "a7124f6c421b4365910b7b9573efd4fd",
+          "Id": "76ebabef3da048c5ac7fb706b013a835",
           "Name": "",
           "Description": "Value of expression at line 11",
           "UsingDefaultValue": false,
@@ -115,7 +115,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "ba42a0958f474b748e768890590fcb8c",
+          "Id": "95ca8e9a35694963bb3bee70ff393fe9",
           "Name": "",
           "Description": "Value of expression at line 12",
           "UsingDefaultValue": false,
@@ -124,7 +124,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "9435b39b72e4457eaefff729bfc36b48",
+          "Id": "8b27a0e138e745dbba9d4fce2aae0076",
           "Name": "",
           "Description": "Value of expression at line 13",
           "UsingDefaultValue": false,
@@ -133,7 +133,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d63eb09a552b45c39c43489f923e1432",
+          "Id": "c7cc27e7436e48908553e27669522e8c",
           "Name": "",
           "Description": "Value of expression at line 14",
           "UsingDefaultValue": false,
@@ -142,7 +142,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "857e5e84f9304088aeff1788e56040ce",
+          "Id": "fa5d355f9ed940268a06338c321b864d",
           "Name": "",
           "Description": "Value of expression at line 15",
           "UsingDefaultValue": false,
@@ -151,7 +151,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "ad320cbdd67148148d0a21fd1be10879",
+          "Id": "75ddd83a9bf24069a35c2e3470c28f13",
           "Name": "",
           "Description": "Value of expression at line 16",
           "UsingDefaultValue": false,
@@ -160,7 +160,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "044dc8d735bc440e88bf4761a61630bf",
+          "Id": "ae3ca95dceea40afbe435bc35697f7e6",
           "Name": "",
           "Description": "Value of expression at line 17",
           "UsingDefaultValue": false,
@@ -169,7 +169,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "bc1af7e4f4ab4da98184d72e5b5ba709",
+          "Id": "b6ea45650ecc419cac27b11fe3d43f51",
           "Name": "",
           "Description": "Value of expression at line 18",
           "UsingDefaultValue": false,
@@ -178,7 +178,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "dc56ee2e48544e26a749635bdc42418f",
+          "Id": "cf2a473a475f46fb827146156aab3bf9",
           "Name": "",
           "Description": "Value of expression at line 19",
           "UsingDefaultValue": false,
@@ -187,7 +187,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "503db25f9a40465199d65c7be860ea8f",
+          "Id": "89b8ed60458d46cdad1e5c053e112295",
           "Name": "",
           "Description": "Value of expression at line 20",
           "UsingDefaultValue": false,
@@ -196,7 +196,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "f29847c53b724ba9b9bb106d4de8551e",
+          "Id": "19ba09effb53454bb4a4139fd6c9a425",
           "Name": "",
           "Description": "Value of expression at line 21",
           "UsingDefaultValue": false,
@@ -205,7 +205,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "7177b134ea574c478d925875d05267f6",
+          "Id": "1fcb6f4b93bd42eb81eb06d4ce03f6dc",
           "Name": "",
           "Description": "Value of expression at line 22",
           "UsingDefaultValue": false,
@@ -214,7 +214,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "32d9a71c9e134370b42a2768f5bc57da",
+          "Id": "6753dc84986748a7b2ac67d1176cbae0",
           "Name": "",
           "Description": "Value of expression at line 23",
           "UsingDefaultValue": false,
@@ -223,7 +223,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "4f8a29e79c2142678b3ae4c4d4e7f5dd",
+          "Id": "6aadab0fd0e1425a874bec73fcf9c4b3",
           "Name": "",
           "Description": "Value of expression at line 24",
           "UsingDefaultValue": false,
@@ -232,7 +232,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "e7e6b006039249b9ba88d4425ff0af4c",
+          "Id": "7f3da6fcb490468fbfca4620b82095c6",
           "Name": "",
           "Description": "Value of expression at line 25",
           "UsingDefaultValue": false,
@@ -241,7 +241,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "ef307a7f9919446392e487a0a3e06964",
+          "Id": "285665068e2b4d598846711f666ee982",
           "Name": "",
           "Description": "Value of expression at line 26",
           "UsingDefaultValue": false,
@@ -250,7 +250,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "602b860b661841cabde68dddde48fa30",
+          "Id": "b1b62b6651024be0bc4ebd098e606e66",
           "Name": "",
           "Description": "Value of expression at line 27",
           "UsingDefaultValue": false,
@@ -259,7 +259,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "b95d02f7a3634008aa545867ffdb8096",
+          "Id": "b80dce5ed54c4a8385523f22dcaaa5f3",
           "Name": "",
           "Description": "Value of expression at line 28",
           "UsingDefaultValue": false,
@@ -268,7 +268,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "29608efa0a5646fd8578a1e57b3a432a",
+          "Id": "a101d8a78b99475fa93f1f456a0652f2",
           "Name": "",
           "Description": "Value of expression at line 29",
           "UsingDefaultValue": false,
@@ -277,7 +277,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "f0daececa23443e5adec073c34804527",
+          "Id": "9e52eeba18464def880c300bc6df8c41",
           "Name": "",
           "Description": "Value of expression at line 30",
           "UsingDefaultValue": false,
@@ -286,7 +286,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "fc610f0745354a71b49b6c72d6033ac5",
+          "Id": "238e7d43f9214256af6f5ddfe95fdfd9",
           "Name": "",
           "Description": "Value of expression at line 31",
           "UsingDefaultValue": false,
@@ -303,11 +303,11 @@
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "WatchWidth": 320.0,
       "WatchHeight": 200.0,
-      "Id": "d6fd9bb900034e78a8ec92e32f6cb81e",
+      "Id": "e1f777db2ba94fc7ab70104902a8ddfe",
       "NodeType": "ExtensionNode",
       "Inputs": [
         {
-          "Id": "d14313d2d7a742318ae5e0658a856800",
+          "Id": "54786599d6144caf82d4f592963d38a9",
           "Name": "",
           "Description": "Node to show output from",
           "UsingDefaultValue": false,
@@ -318,7 +318,7 @@
       ],
       "Outputs": [
         {
-          "Id": "59ca2a31fafa488389d275b39f3125cf",
+          "Id": "6772e8d4578b45b5b09ec0fa13d2525b",
           "Name": "",
           "Description": "Node output",
           "UsingDefaultValue": false,
@@ -334,11 +334,11 @@
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "WatchWidth": 320.0,
       "WatchHeight": 200.0,
-      "Id": "1e87d8cb972c4a09a678d24f70277fe4",
+      "Id": "eda227fafa8d45f3a9a3a33ba7baf909",
       "NodeType": "ExtensionNode",
       "Inputs": [
         {
-          "Id": "51d1a62795aa4ceab4f5948e4b9bb384",
+          "Id": "22bfdeaa186b453e97d8dec10422376f",
           "Name": "",
           "Description": "Node to show output from",
           "UsingDefaultValue": false,
@@ -349,7 +349,7 @@
       ],
       "Outputs": [
         {
-          "Id": "c9c3f8ca0911488ea3690239cacdd23b",
+          "Id": "bf6ba76518be43adab3ed9c45e8005e8",
           "Name": "",
           "Description": "Node output",
           "UsingDefaultValue": false,
@@ -365,11 +365,11 @@
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "WatchWidth": 320.0,
       "WatchHeight": 200.0,
-      "Id": "ae8e11c9d4d3442ab1e536a746b07423",
+      "Id": "b8bd9da32dd941ffb49814857fd6be34",
       "NodeType": "ExtensionNode",
       "Inputs": [
         {
-          "Id": "833f2f7dee1741cb97955c19898d365b",
+          "Id": "75357a723df649ebad7215b67f575083",
           "Name": "",
           "Description": "Node to show output from",
           "UsingDefaultValue": false,
@@ -380,7 +380,7 @@
       ],
       "Outputs": [
         {
-          "Id": "17cfbf02972d430183e7e0aaa6517d89",
+          "Id": "61aa9776d66246febf8a0a788976d63e",
           "Name": "",
           "Description": "Node output",
           "UsingDefaultValue": false,
@@ -395,21 +395,21 @@
   ],
   "Connectors": [
     {
-      "Start": "3cc8e51271a44d919009ffcdfcf14d3a",
-      "End": "d14313d2d7a742318ae5e0658a856800",
-      "Id": "1a98d043a6b244d293796dbd796c83bc",
+      "Start": "5afc2c05734f4d88bf49879242fe7d36",
+      "End": "54786599d6144caf82d4f592963d38a9",
+      "Id": "2db828de647f4ca58e3878d721f0373c",
       "IsHidden": "False"
     },
     {
-      "Start": "503db25f9a40465199d65c7be860ea8f",
-      "End": "51d1a62795aa4ceab4f5948e4b9bb384",
-      "Id": "fdfa97cdcb6443ab8e4a58a6c5c5aac4",
+      "Start": "89b8ed60458d46cdad1e5c053e112295",
+      "End": "22bfdeaa186b453e97d8dec10422376f",
+      "Id": "87272afe9b454f0c98ea18c14920face",
       "IsHidden": "False"
     },
     {
-      "Start": "f0daececa23443e5adec073c34804527",
-      "End": "833f2f7dee1741cb97955c19898d365b",
-      "Id": "26f4e067824745c194f1d4114b318d20",
+      "Start": "9e52eeba18464def880c300bc6df8c41",
+      "End": "75357a723df649ebad7215b67f575083",
+      "Id": "738e68f4860b457da7b8b1e218209c9c",
       "IsHidden": "False"
     }
   ],
@@ -420,7 +420,7 @@
       "Version": "7.0.0",
       "ReferenceType": "Package",
       "Nodes": [
-        "e65611cb21dc46bea41e4b46314b97ad"
+        "0628acc25e3f43988d79171a9c29bac5"
       ]
     }
   ],
@@ -459,7 +459,7 @@
     "ConnectorPins": [],
     "NodeViews": [
       {
-        "Id": "e65611cb21dc46bea41e4b46314b97ad",
+        "Id": "0628acc25e3f43988d79171a9c29bac5",
         "Name": "CivilConnection Robot",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -469,7 +469,7 @@
         "Y": 0.0
       },
       {
-        "Id": "d6fd9bb900034e78a8ec92e32f6cb81e",
+        "Id": "e1f777db2ba94fc7ab70104902a8ddfe",
         "Name": "Watch: codigos",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -479,7 +479,7 @@
         "Y": 0.0
       },
       {
-        "Id": "1e87d8cb972c4a09a678d24f70277fe4",
+        "Id": "eda227fafa8d45f3a9a3a33ba7baf909",
         "Name": "Watch: paineis",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -489,7 +489,7 @@
         "Y": 260.0
       },
       {
-        "Id": "ae8e11c9d4d3442ab1e536a746b07423",
+        "Id": "b8bd9da32dd941ffb49814857fd6be34",
         "Name": "Watch: somaFZ_ELU_kN",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -501,7 +501,7 @@
     ],
     "Annotations": [
       {
-        "Id": "7117484bd6c94293a711def6e50a3dd1",
+        "Id": "131a380166c44b88bb9bb8acfd18e6b9",
         "Title": "CivilConnection 2027 - Civil 3D para Robot",
         "DescriptionText": null,
         "IsExpanded": true,

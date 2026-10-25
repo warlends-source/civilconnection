@@ -283,6 +283,18 @@ namespace CivilConnection.Robot
         }
 
         /// <summary>
+        /// Assigns a support label to the free lower ends of the columns (vertical bars whose lower node is not
+        /// connected to any other bar), whatever their elevation.
+        /// </summary>
+        /// <param name="supportName">Support name.</param>
+        /// <param name="waitFor">Any input that must be computed first (e.g. SplitBarsAtNodes).</param>
+        /// <returns>The node numbers.</returns>
+        public IList<int> AssignSupportToColumnBases(string supportName, [DefaultArgument("null")] object waitFor = null)
+        {
+            return AssignSupport(Link.ColumnBaseNodes(), supportName);
+        }
+
+        /// <summary>
         /// Assigns a support label to the lowest nodes of the model (e.g. the base of the columns).
         /// </summary>
         /// <param name="supportName">Support name.</param>
@@ -379,6 +391,54 @@ namespace CivilConnection.Robot
         #endregion
 
         #region Revit
+
+        /// <summary>
+        /// Creates the Revit analytical model of the physical structural framing, columns and floors that do not have one.
+        /// Member ends are moved to the closest member within the tolerance (columns first, then longer members) so that
+        /// the analytical members meet; ends farther than the tolerance stay free. Changes the Revit document: run it on a copy
+        /// and review the result.
+        /// </summary>
+        /// <param name="tolerance">Maximum end movement in meters.</param>
+        /// <param name="floors">Also create analytical panels for floors.</param>
+        /// <returns>Counts of what was created and the analytical elements of the document.</returns>
+        [MultiReturn(new[] { "Members", "Panels", "EndsMoved", "FreeEnds", "AlreadyAnalytical", "Skipped", "AnalyticalElements" })]
+        public static Dictionary<string, object> CreateRevitAnalyticalModel(double tolerance = 0.25, bool floors = true)
+        {
+            DB.Document doc = DocumentManager.Instance.CurrentDBDocument;
+            var ids = new DB.FilteredElementCollector(doc).OfCategory(DB.BuiltInCategory.OST_StructuralFraming).WhereElementIsNotElementType().ToElementIds()
+                .Concat(new DB.FilteredElementCollector(doc).OfCategory(DB.BuiltInCategory.OST_StructuralColumns).WhereElementIsNotElementType().ToElementIds());
+            if (floors)
+            {
+                ids = ids.Concat(new DB.FilteredElementCollector(doc).OfCategory(DB.BuiltInCategory.OST_Floors).WhereElementIsNotElementType().ToElementIds());
+            }
+
+            var builder = new AnalyticalBuilder();
+            RevitServices.Transactions.TransactionManager.Instance.EnsureInTransaction(doc);
+            builder.Build(doc, ids.ToList(), tolerance);
+            RevitServices.Transactions.TransactionManager.Instance.TransactionTaskDone();
+
+            return new Dictionary<string, object>
+            {
+                { "Members", builder.MembersCreated },
+                { "Panels", builder.PanelsCreated },
+                { "EndsMoved", builder.EndsMoved },
+                { "FreeEnds", builder.FreeEnds },
+                { "AlreadyAnalytical", builder.AlreadyAnalytical },
+                { "Skipped", builder.Skipped },
+                { "AnalyticalElements", RevitAnalyticalElements(true, floors) }
+            };
+        }
+
+        /// <summary>
+        /// Splits Robot bars at the nodes lying on them, so that members meeting at mid-span are connected.
+        /// Run it after all bars are created and before meshing.
+        /// </summary>
+        /// <param name="waitFor">Any input that must be computed first (e.g. the geometry).</param>
+        /// <returns>Number of bars split.</returns>
+        public int SplitBarsAtNodes([DefaultArgument("null")] object waitFor = null)
+        {
+            return Link.SplitBarsAtNodes();
+        }
 
         /// <summary>
         /// Collects the analytical members (beams, columns, braces) and analytical panels (floors, walls) of the active Revit document.

@@ -1,5 +1,5 @@
 {
-  "Uuid": "230e8508-2fc6-45b7-a46c-21b26451bf0c",
+  "Uuid": "d642e264-0944-49fa-9021-3d7e36c94c15",
   "IsCustomNode": false,
   "Description": "Envia a estrutura do Revit 2027 para o Robot 2027, aplica peso proprio e sobrecarga, calcula e le as reacoes.",
   "Name": "Revit para Robot",
@@ -11,12 +11,12 @@
   "Nodes": [
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "Id": "2bb5deba6d4844088acea6074d2a7b41",
+      "Id": "b9a21b5ed4c54fdbac3b33ee3596b028",
       "NodeType": "CodeBlockNode",
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "6d6d483925cb471bbc99f85003a8ee43",
+          "Id": "c1f400aedf7649bbb2845232a6848ba1",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -25,7 +25,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "3d3c380e81e34b53843fef72a55a84f0",
+          "Id": "fdb310aa9e3e411795da1088362d160c",
           "Name": "",
           "Description": "Value of expression at line 2",
           "UsingDefaultValue": false,
@@ -34,7 +34,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "db04159efd964b40b54d697d7b652ae6",
+          "Id": "def154afc7fa4252a782d4b23e3bd0bd",
           "Name": "",
           "Description": "Value of expression at line 3",
           "UsingDefaultValue": false,
@@ -43,7 +43,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "bb7b636f71f14e76893ce2994186497e",
+          "Id": "2924d96bfc234acf8194b218a6361120",
           "Name": "",
           "Description": "Value of expression at line 4",
           "UsingDefaultValue": false,
@@ -52,7 +52,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "7f852b5415864a80b2d5162b892d5623",
+          "Id": "59be58c13594410ba4ffd5ba24f931d2",
           "Name": "",
           "Description": "Value of expression at line 5",
           "UsingDefaultValue": false,
@@ -61,7 +61,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "22b885bc57b04566bb36c0f1324c0452",
+          "Id": "59b28e7984104429ab0d1f117a1a7db3",
           "Name": "",
           "Description": "Value of expression at line 6",
           "UsingDefaultValue": false,
@@ -70,7 +70,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "bd45632dd2fa4e06aa1eb52a33dabd40",
+          "Id": "2caa219e2cbb4446b2dde304baa3c7bc",
           "Name": "",
           "Description": "Value of expression at line 7",
           "UsingDefaultValue": false,
@@ -79,7 +79,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "3d78c958240f496bb6bed2b26e15f4c5",
+          "Id": "e95b0f21a49e4e0cb12ede7f3f435a39",
           "Name": "",
           "Description": "Value of expression at line 8",
           "UsingDefaultValue": false,
@@ -88,7 +88,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "67cd99b1fbc44690b72ec23eace77172",
+          "Id": "4cbcea1ff1d14d55887746d05be0c6cd",
           "Name": "",
           "Description": "Value of expression at line 9",
           "UsingDefaultValue": false,
@@ -97,7 +97,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "4bc9ed3f6d674398be87a763ad9747e4",
+          "Id": "06503b9cae0e4b928b865d62cba04159",
           "Name": "",
           "Description": "Value of expression at line 10",
           "UsingDefaultValue": false,
@@ -106,7 +106,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "f7fd558a2f1f4784a3f4aad442850059",
+          "Id": "2c733f535f8548fca4392953b7b5975b",
           "Name": "",
           "Description": "Value of expression at line 11",
           "UsingDefaultValue": false,
@@ -115,7 +115,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "955af2fc8d964a1cbb029408adf21d84",
+          "Id": "58913c98766b45bcb138cea4ae59c964",
           "Name": "",
           "Description": "Value of expression at line 12",
           "UsingDefaultValue": false,
@@ -124,7 +124,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "e12c045d665146678686f1886b30a08e",
+          "Id": "7e522adead4548ea9f7978a96fe9d0d4",
           "Name": "",
           "Description": "Value of expression at line 13",
           "UsingDefaultValue": false,
@@ -133,7 +133,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "c087f030650445659a85e53e220332d1",
+          "Id": "007ef2c1cae24182a180b29c18b9bf59",
           "Name": "",
           "Description": "Value of expression at line 14",
           "UsingDefaultValue": false,
@@ -142,7 +142,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "024658862bb24e87aeab0b695486c32a",
+          "Id": "b116914865ff42c4b9331a8596b3e3b1",
           "Name": "",
           "Description": "Value of expression at line 15",
           "UsingDefaultValue": false,
@@ -151,7 +151,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "c5d0be61487c4b9cb6e75d21b32403bc",
+          "Id": "62a1f2220f994bd8945355bb85a9e083",
           "Name": "",
           "Description": "Value of expression at line 16",
           "UsingDefaultValue": false,
@@ -160,7 +160,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d6e94c06ae354a86bcf94a16e2075170",
+          "Id": "fce7e1cfd6a9451da16d118daeb6c87b",
           "Name": "",
           "Description": "Value of expression at line 17",
           "UsingDefaultValue": false,
@@ -169,7 +169,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "6f0ebfcca6414ffaa86bec11b7204a54",
+          "Id": "07456fa6554a40deb3ba1abeb3373b3d",
           "Name": "",
           "Description": "Value of expression at line 18",
           "UsingDefaultValue": false,
@@ -178,7 +178,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "3821d744c5584b79809b503302236297",
+          "Id": "70d5698fd9694092938926effc77df4f",
           "Name": "",
           "Description": "Value of expression at line 19",
           "UsingDefaultValue": false,
@@ -187,7 +187,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "407dcef116bd49d493fa62b5534f1173",
+          "Id": "467ad743773447d2ac20214b5db5f8e8",
           "Name": "",
           "Description": "Value of expression at line 20",
           "UsingDefaultValue": false,
@@ -196,7 +196,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d233dd3fdf454623a9ece6a60a063ac4",
+          "Id": "975fb4619503466cad3ed4ef9fc269e7",
           "Name": "",
           "Description": "Value of expression at line 21",
           "UsingDefaultValue": false,
@@ -205,9 +205,36 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d03b6c55cd6a4baf87d9400afbefdbf3",
+          "Id": "fca003a033d34582bdc3cf8cb73eb2c7",
           "Name": "",
           "Description": "Value of expression at line 22",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d6d73b5e4b8641d9aa142c4e269c4445",
+          "Name": "",
+          "Description": "Value of expression at line 23",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ebc3f7cf31b944a2863c0bd98655a55e",
+          "Name": "",
+          "Description": "Value of expression at line 24",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "01d9819bf0074c468fd03b86aefc8671",
+          "Name": "",
+          "Description": "Value of expression at line 25",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -216,17 +243,17 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
-      "Code": "// PARAMETROS (abra o Robot com um projeto qualquer antes de executar)\n// usarAnalitico = true usa o modelo analitico (recomendado: barras conectadas nos nos)\nusarAnalitico = true;\ncalcular = true;\n// sobrecarga nas lajes em Pa (N/m2), negativa = para baixo\ncargaLaje = -3000;\n// apoio engastado nos nos ate esta distancia (m) acima do no mais baixo\ntoleranciaApoio = 0.01;\n// FLUXO\nrobot = CivilConnection.Robot.RobotModel.Connect(true, \"Shell\", -1, null);\nelementos = usarAnalitico ? CivilConnection.Robot.RobotModel.RevitAnalyticalElements(true, true) : CivilConnection.Robot.RobotModel.RevitStructuralElements(true, true, true, false);\nenvio = robot.FromRevitAnalytical(elementos, \"\", 0.5, 0.5);\nengaste = robot.CreateSupport(\"ENGASTE\", true, true, true, true, true, true);\napoios = robot.AssignSupportToLowestNodes(engaste, toleranciaApoio, envio);\nlimpar = robot.DeleteAllCases(apoios);\ncasoG = robot.CreateLoadCase(1, \"G - peso proprio\", \"Permanent\", limpar);\npp = robot.AddSelfWeight(casoG, 1);\ncasoQ = robot.CreateLoadCase(2, \"Q - sobrecarga\", \"Exploatation\", pp);\nsobrecarga = robot.AddPanelUniformLoads(casoQ, envio[\"Panels\"], 0, 0, cargaLaje, false);\nelu = robot.CreateCombination(3, \"ELU 1.4G + 1.4Q\", [pp, sobrecarga], [1.4, 1.4], \"ULS\");\nmalha = robot.GenerateMesh(elu);\ncalculado = robot.Calculate(calcular, malha);\nreacoesG = robot.NodeReactions(apoios, pp, calculado);\npesoProprio_kN = Math.Sum(reacoesG[\"FZ\"]) / 1000;\nreacoesELU = robot.NodeReactions(apoios, elu, calculado);\nsomaFZ_ELU_kN = Math.Sum(reacoesELU[\"FZ\"]) / 1000;\nfim = robot.EndSession(somaFZ_ELU_kN);"
+      "Code": "// PARAMETROS (abra o Robot com um projeto qualquer antes de executar)\n// criarAnalitico = true cria o modelo analitico do Revit que faltar, ajustando as extremidades ate a tolerancia (m).\n// ALTERA O DOCUMENTO DO REVIT: use uma copia do arquivo e revise o resultado.\ncriarAnalitico = true;\ntoleranciaAnalitico = 0.25;\n// incluirLajes = false deixa de fora as lajes (pisos sobre o solo ficam soltos sem base elastica)\nincluirLajes = false;\ncalcular = true;\n// sobrecarga nas lajes em Pa (N/m2), negativa = para baixo\ncargaLaje = -3000;\n// FLUXO\nanalitico = criarAnalitico ? CivilConnection.Robot.RobotModel.CreateRevitAnalyticalModel(toleranciaAnalitico, incluirLajes) : null;\nelementos = criarAnalitico ? analitico[\"AnalyticalElements\"] : CivilConnection.Robot.RobotModel.RevitAnalyticalElements(true, incluirLajes);\nrobot = CivilConnection.Robot.RobotModel.Connect(true, \"Shell\", -1, null);\nenvio = robot.FromRevitAnalytical(elementos, \"\", 0.5, 0.5);\n// liga as pecas que chegam no meio de outras (juncoes em T)\ndivididas = robot.SplitBarsAtNodes(envio);\nengaste = robot.CreateSupport(\"ENGASTE\", true, true, true, true, true, true);\napoios = robot.AssignSupportToColumnBases(engaste, divididas);\nlimpar = robot.DeleteAllCases(apoios);\ncasoG = robot.CreateLoadCase(1, \"G - peso proprio\", \"Permanent\", limpar);\npp = robot.AddSelfWeight(casoG, 1);\ncasoQ = robot.CreateLoadCase(2, \"Q - sobrecarga\", \"Exploatation\", pp);\nsobrecarga = robot.AddPanelUniformLoads(casoQ, envio[\"Panels\"], 0, 0, cargaLaje, false);\nelu = robot.CreateCombination(3, \"ELU 1.4G + 1.4Q\", [pp, sobrecarga], [1.4, 1.4], \"ULS\");\nmalha = robot.GenerateMesh(elu);\ncalculado = robot.Calculate(calcular, malha);\nreacoesG = robot.NodeReactions(apoios, pp, calculado);\npesoProprio_kN = Math.Sum(reacoesG[\"FZ\"]) / 1000;\nreacoesELU = robot.NodeReactions(apoios, elu, calculado);\nsomaFZ_ELU_kN = Math.Sum(reacoesELU[\"FZ\"]) / 1000;\nfim = robot.EndSession(somaFZ_ELU_kN);"
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "WatchWidth": 320.0,
       "WatchHeight": 200.0,
-      "Id": "1d2572dc2af84141bbaee7c9728ea018",
+      "Id": "99efe6bb3dff456187831195c58b17f9",
       "NodeType": "ExtensionNode",
       "Inputs": [
         {
-          "Id": "fcdeb9c225f24b45a2cdb6cb09a8953a",
+          "Id": "ef97bce810be4912b853c62c1b9049cb",
           "Name": "",
           "Description": "Node to show output from",
           "UsingDefaultValue": false,
@@ -237,7 +264,7 @@
       ],
       "Outputs": [
         {
-          "Id": "355b6215f10349128c8f3839de13aa27",
+          "Id": "4ffe99c406da40e69341eaa74d12a0f3",
           "Name": "",
           "Description": "Node output",
           "UsingDefaultValue": false,
@@ -253,11 +280,11 @@
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "WatchWidth": 320.0,
       "WatchHeight": 200.0,
-      "Id": "ea39b7f9221745feaf76aee99386d591",
+      "Id": "169caa85b4404144bb5215a4c72f76ea",
       "NodeType": "ExtensionNode",
       "Inputs": [
         {
-          "Id": "f463d2c259e74e69aa54de5093f8d216",
+          "Id": "40a3d4a202194d28bd2c0568300191bd",
           "Name": "",
           "Description": "Node to show output from",
           "UsingDefaultValue": false,
@@ -268,7 +295,7 @@
       ],
       "Outputs": [
         {
-          "Id": "7b8de5c9913f47f48b1637c84a9fcce4",
+          "Id": "6c37ceb6f2bb46c69fa68b01458aa33a",
           "Name": "",
           "Description": "Node output",
           "UsingDefaultValue": false,
@@ -284,11 +311,11 @@
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
       "WatchWidth": 320.0,
       "WatchHeight": 200.0,
-      "Id": "8cb13b0ec5f2481d86b4a61f084920a8",
+      "Id": "ef9a0f123d644150a950bbfdf2a07757",
       "NodeType": "ExtensionNode",
       "Inputs": [
         {
-          "Id": "05c5a3f88b274753aa4cf4951067f292",
+          "Id": "7ad85da4249545fcbc4ab4c13143228b",
           "Name": "",
           "Description": "Node to show output from",
           "UsingDefaultValue": false,
@@ -299,7 +326,38 @@
       ],
       "Outputs": [
         {
-          "Id": "9c28faf3f98e4fc3b4ef127a08c8709a",
+          "Id": "585e10ccfc6749d691d1503617b35869",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 320.0,
+      "WatchHeight": 200.0,
+      "Id": "588927ced4674a5e85a5a61a6296ed02",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "f84c445cf790440b8a321916b0dee011",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3731e6496b234e9f92264b6538eca4e0",
           "Name": "",
           "Description": "Node output",
           "UsingDefaultValue": false,
@@ -314,21 +372,27 @@
   ],
   "Connectors": [
     {
-      "Start": "bd45632dd2fa4e06aa1eb52a33dabd40",
-      "End": "fcdeb9c225f24b45a2cdb6cb09a8953a",
-      "Id": "84d8b24fe526433488e1c28f48252fd8",
+      "Start": "59b28e7984104429ab0d1f117a1a7db3",
+      "End": "ef97bce810be4912b853c62c1b9049cb",
+      "Id": "ddbfc8a5d58745eab77e2a069ceef4f2",
       "IsHidden": "False"
     },
     {
-      "Start": "3821d744c5584b79809b503302236297",
-      "End": "f463d2c259e74e69aa54de5093f8d216",
-      "Id": "989b8bfa565f4d98920fbf60b35be15c",
+      "Start": "06503b9cae0e4b928b865d62cba04159",
+      "End": "40a3d4a202194d28bd2c0568300191bd",
+      "Id": "5d884b9a7055434ab494eed9a39c11da",
       "IsHidden": "False"
     },
     {
-      "Start": "d233dd3fdf454623a9ece6a60a063ac4",
-      "End": "05c5a3f88b274753aa4cf4951067f292",
-      "Id": "9eaa1ee7fea643f4a6533ea7b48a2dd6",
+      "Start": "fca003a033d34582bdc3cf8cb73eb2c7",
+      "End": "7ad85da4249545fcbc4ab4c13143228b",
+      "Id": "6ec62d856b1244a7935178a5ffafb79f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ebc3f7cf31b944a2863c0bd98655a55e",
+      "End": "f84c445cf790440b8a321916b0dee011",
+      "Id": "d59c787b989349daa0aef93084f5ffd4",
       "IsHidden": "False"
     }
   ],
@@ -339,7 +403,7 @@
       "Version": "7.0.0",
       "ReferenceType": "Package",
       "Nodes": [
-        "2bb5deba6d4844088acea6074d2a7b41"
+        "b9a21b5ed4c54fdbac3b33ee3596b028"
       ]
     }
   ],
@@ -378,7 +442,7 @@
     "ConnectorPins": [],
     "NodeViews": [
       {
-        "Id": "2bb5deba6d4844088acea6074d2a7b41",
+        "Id": "b9a21b5ed4c54fdbac3b33ee3596b028",
         "Name": "CivilConnection Robot",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -388,8 +452,8 @@
         "Y": 0.0
       },
       {
-        "Id": "1d2572dc2af84141bbaee7c9728ea018",
-        "Name": "Watch: envio",
+        "Id": "99efe6bb3dff456187831195c58b17f9",
+        "Name": "Watch: analitico",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
@@ -398,8 +462,8 @@
         "Y": 0.0
       },
       {
-        "Id": "ea39b7f9221745feaf76aee99386d591",
-        "Name": "Watch: pesoProprio_kN",
+        "Id": "169caa85b4404144bb5215a4c72f76ea",
+        "Name": "Watch: divididas",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
@@ -408,19 +472,29 @@
         "Y": 260.0
       },
       {
-        "Id": "8cb13b0ec5f2481d86b4a61f084920a8",
-        "Name": "Watch: somaFZ_ELU_kN",
+        "Id": "ef9a0f123d644150a950bbfdf2a07757",
+        "Name": "Watch: pesoProprio_kN",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
         "X": 1400.0,
         "Y": 520.0
+      },
+      {
+        "Id": "588927ced4674a5e85a5a61a6296ed02",
+        "Name": "Watch: somaFZ_ELU_kN",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1400.0,
+        "Y": 780.0
       }
     ],
     "Annotations": [
       {
-        "Id": "aeb8511c593145bba47961201513fb09",
+        "Id": "2b656a0d3aa044ed9bdfa685fbc8fb80",
         "Title": "CivilConnection 2027 - Revit para Robot",
         "DescriptionText": null,
         "IsExpanded": true,

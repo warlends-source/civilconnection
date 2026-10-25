@@ -84,7 +84,7 @@ When Robot Structural Analysis Professional 2027 is installed, the 2027 package 
 * **Labels, loads and combinations**: `CreateMaterial`, `CreateRectangularSection`, `CreatePanelThickness` (with elastic foundation), `CreateSupport`, `CreateLoadCase`, `AddSelfWeight`, `AddNodalForces`, `AddBarUniformLoads`, `AddPanelUniformLoads`, `CreateCombination`, `GenerateMesh`, `Calculate`, `SaveAs`.
 * **Results**: `NodeDisplacements`, `NodeReactions`, `BarForces`, `PanelForces` and `NearestNodes`.
 
-Loads and results are in SI units (N, m, Pa). Every run of a graph adds objects to the Robot model, so use `Connect` with `newProject = true` to rebuild it from scratch. Connect `waitFor` inputs to control the order of the steps. Bar orientation (section rotation) and member releases are not transferred yet.
+Loads and results are in SI units (N, m, Pa). Every run of a graph adds objects to the Robot model, so use `Connect` with `newProject = true` to rebuild it from scratch. Connect `waitFor` inputs to control the order of the steps. From Revit, each bar is rotated so that its local z axis follows the height of the section (cross-section rotation included; Robot computes the angle), and the end releases of the analytical members are transferred; `SplitBarsAtNodes` keeps both. Sections defined by properties use the member axes, so asymmetric profiles (angles) are not described in their principal axes.
 
 Example graphs: [Examples/Dynamo/2027](Examples/Dynamo/2027).
 

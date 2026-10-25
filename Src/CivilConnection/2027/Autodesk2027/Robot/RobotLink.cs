@@ -201,6 +201,65 @@ namespace CivilConnection.Robot
         }
 
         /// <summary>
+        /// Rotates a bar about its axis so that its local z axis points as close as possible to the given direction
+        /// (the height direction of the section). Robot computes the angle, so its local axis convention is respected.
+        /// </summary>
+        internal void SetBarOrientation(int bar, double zx, double zy, double zz)
+        {
+            var b = (IRobotBar)Structure.Bars.Get(bar);
+
+            // CalcGamma returns radians, Gamma is set in degrees
+            b.Gamma = b.CalcGamma(zx, zy, zz) * 180 / Math.PI;
+        }
+
+        /// <summary>
+        /// Local z axis of a bar as computed by Robot (to check orientations).
+        /// </summary>
+        internal double[] BarLocalZ(int bar)
+        {
+            var b = (IRobotBar)Structure.Bars.Get(bar);
+            var x = (RobotGeoPoint3D)App.CmpntFactory.Create(IRobotComponentType.I_CT_GEO_POINT_3D);
+            var y = (RobotGeoPoint3D)App.CmpntFactory.Create(IRobotComponentType.I_CT_GEO_POINT_3D);
+            var z = (RobotGeoPoint3D)App.CmpntFactory.Create(IRobotComponentType.I_CT_GEO_POINT_3D);
+            b.GetLCS(x, y, z);
+            return new[] { z.X, z.Y, z.Z };
+        }
+
+        /// <summary>
+        /// Assigns end releases to a bar. Each array is UX, UY, UZ, RX, RY, RZ in local axes; true = released.
+        /// A release label is created once per combination (e.g. REL_000011_000011 for pinned ends).
+        /// </summary>
+        internal void SetBarRelease(int bar, bool[] start, bool[] end)
+        {
+            if (!start.Any(r => r) && !end.Any(r => r)) return;
+
+            string Code(bool[] r) => string.Concat(r.Select(x => x ? '1' : '0'));
+            string name = "REL_" + Code(start) + "_" + Code(end);
+            if (Structure.Labels.Exist(IRobotLabelType.I_LT_BAR_RELEASE, name) == 0)
+            {
+                IRobotLabel label = Structure.Labels.Create(IRobotLabelType.I_LT_BAR_RELEASE, name);
+                var data = (IRobotBarReleaseData)label.Data;
+                SetEnd(data.StartNode, start);
+                SetEnd(data.EndNode, end);
+                Structure.Labels.Store(label);
+            }
+            ((IRobotBar)Structure.Bars.Get(bar)).SetLabel(IRobotLabelType.I_LT_BAR_RELEASE, name);
+        }
+
+        private static void SetEnd(RobotBarEndReleaseData end, bool[] r)
+        {
+            IRobotBarEndReleaseValue V(bool released) => released ? IRobotBarEndReleaseValue.I_BERV_STD : IRobotBarEndReleaseValue.I_BERV_NONE;
+            end.UX = V(r[0]); end.UY = V(r[1]); end.UZ = V(r[2]);
+            end.RX = V(r[3]); end.RY = V(r[4]); end.RZ = V(r[5]);
+        }
+
+        private static bool[] GetEnd(RobotBarEndReleaseData end)
+        {
+            bool R(IRobotBarEndReleaseValue v) => v != IRobotBarEndReleaseValue.I_BERV_NONE;
+            return new[] { R(end.UX), R(end.UY), R(end.UZ), R(end.RX), R(end.RY), R(end.RZ) };
+        }
+
+        /// <summary>
         /// Returns the existing node closest to the given coordinates (including mesh nodes), without creating one.
         /// </summary>
         internal int FindNearestNode(double x, double y, double z, out double distance)
@@ -298,14 +357,21 @@ namespace CivilConnection.Robot
             }
             var byNumber = nodes.ToDictionary(n => n.N);
 
-            var bars = new List<(int N, int A, int B, string Section, string Material)>();
+            var bars = new List<(int N, int A, int B, string Section, string Material, double Gamma, bool[] RelStart, bool[] RelEnd)>();
             IRobotCollection allBars = Structure.Bars.GetAll();
             for (int i = 1; i <= allBars.Count; i++)
             {
                 var b = (IRobotBar)allBars.Get(i);
                 string sec = b.HasLabel(IRobotLabelType.I_LT_BAR_SECTION) != 0 ? b.GetLabelName(IRobotLabelType.I_LT_BAR_SECTION) : "";
                 string mat = b.HasLabel(IRobotLabelType.I_LT_MATERIAL) != 0 ? b.GetLabelName(IRobotLabelType.I_LT_MATERIAL) : "";
-                bars.Add((b.Number, b.StartNode, b.EndNode, sec, mat));
+                bool[] rs = new bool[6], re = new bool[6];
+                if (b.HasLabel(IRobotLabelType.I_LT_BAR_RELEASE) != 0)
+                {
+                    var rel = (IRobotBarReleaseData)b.GetLabel(IRobotLabelType.I_LT_BAR_RELEASE).Data;
+                    rs = GetEnd(rel.StartNode);
+                    re = GetEnd(rel.EndNode);
+                }
+                bars.Add((b.Number, b.StartNode, b.EndNode, sec, mat, b.Gamma, rs, re));
             }
 
             int split = 0;
@@ -340,6 +406,10 @@ namespace CivilConnection.Robot
                     var nb = (IRobotBar)Structure.Bars.Get(number);
                     if (bar.Section.Length > 0) nb.SetLabel(IRobotLabelType.I_LT_BAR_SECTION, bar.Section);
                     if (bar.Material.Length > 0) nb.SetLabel(IRobotLabelType.I_LT_MATERIAL, bar.Material);
+                    nb.Gamma = bar.Gamma;
+
+                    // the start release stays at the first piece and the end release at the last one
+                    SetBarRelease(number, k == 0 ? bar.RelStart : new bool[6], k == chain.Count - 2 ? bar.RelEnd : new bool[6]);
                 }
                 split++;
             }

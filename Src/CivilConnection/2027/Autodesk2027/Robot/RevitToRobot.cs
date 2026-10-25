@@ -69,7 +69,10 @@ namespace CivilConnection.Robot
                 {
                     string material = Material(member.MaterialId);
                     var physical = _association == null ? null : _doc.GetElement(_association.GetAssociatedElementId(member.Id)) as FamilyInstance;
-                    AddBars(id, "AnalyticalMember", Divide(member.GetCurve(), maxSegmentLength), Section(member.SectionTypeId, material, defaultSection, physical), material);
+                    Curve curve = member.GetCurve();
+                    XYZ up = physical == null ? null : SectionUp(physical, (curve.GetEndPoint(1) - curve.GetEndPoint(0)).Normalize());
+                    Releases(member, out bool[] relStart, out bool[] relEnd);
+                    AddBars(id, "AnalyticalMember", Divide(curve, maxSegmentLength), Section(member.SectionTypeId, material, defaultSection, physical), material, up, relStart, relEnd);
                 }
                 else if (analytical is AnalyticalPanel panel)
                 {
@@ -82,7 +85,7 @@ namespace CivilConnection.Robot
                     string section = Section(fi.Symbol.Id, material, defaultSection, fi);
                     IList<XYZ> points = PhysicalAxis(fi, maxSegmentLength);
                     if (points == null) Skipped.Add(id.GetValue());
-                    else AddBars(id, "Physical" + fi.StructuralType, points, section, material);
+                    else AddBars(id, "Physical" + fi.StructuralType, points, section, material, SectionUp(fi, (points[points.Count - 1] - points[0]).Normalize()), null, null);
                 }
                 else if (element is Floor floor)
                 {
@@ -115,13 +118,31 @@ namespace CivilConnection.Robot
             }
         }
 
-        private void AddBars(ElementId id, string source, IList<XYZ> points, string section, string material)
+        /// <param name="up">Height direction of the section (Robot local z), or null to keep the Robot default.</param>
+        /// <param name="relStart">Releases at the start (UX..RZ, true = released), or null.</param>
+        /// <param name="relEnd">Releases at the end, or null.</param>
+        private void AddBars(ElementId id, string source, IList<XYZ> points, string section, string material, XYZ up, bool[] relStart, bool[] relEnd)
         {
             var bars = new List<int>();
             for (int i = 0; i < points.Count - 1; i++)
             {
                 int bar = _link.CreateBar(_toRobot(points[i]), _toRobot(points[i + 1]), section, material);
-                if (bar > 0) bars.Add(bar);
+                if (bar <= 0) continue;
+                bars.Add(bar);
+                if (up != null) _link.SetBarOrientation(bar, up.X, up.Y, up.Z);
+            }
+            if (bars.Count > 0 && (relStart != null || relEnd != null))
+            {
+                bool[] none = new bool[6];
+                if (bars.Count == 1)
+                {
+                    _link.SetBarRelease(bars[0], relStart ?? none, relEnd ?? none);
+                }
+                else
+                {
+                    _link.SetBarRelease(bars[0], relStart ?? none, none);
+                    _link.SetBarRelease(bars[bars.Count - 1], none, relEnd ?? none);
+                }
             }
             ElementIds.Add(id.GetValue());
             Bars.Add(bars);
@@ -135,6 +156,33 @@ namespace CivilConnection.Robot
             Bars.Add(new List<int>());
             Panels.Add(_link.CreatePanel(contour, thickness, meshSize));
             Source.Add(source);
+        }
+
+        /// <summary>
+        /// Height direction of the section of a framing or column instance, perpendicular to the member axis.
+        /// Framing: the instance transform has BasisX along the member and BasisZ as the section up direction (cross-section
+        /// rotation included). Columns: BasisZ is the axis and the section height h lies along BasisY.
+        /// </summary>
+        internal static XYZ SectionUp(FamilyInstance fi, XYZ axis)
+        {
+            Transform t = fi.GetTransform();
+            XYZ up = Math.Abs(t.BasisZ.DotProduct(axis)) > 0.99 ? t.BasisY : t.BasisZ;
+            XYZ perpendicular = up - axis * up.DotProduct(axis);
+            return perpendicular.GetLength() < 1e-6 ? null : perpendicular.Normalize();
+        }
+
+        /// <summary>
+        /// End releases of an analytical member (UX, UY, UZ, RX, RY, RZ; true = released).
+        /// </summary>
+        private static void Releases(AnalyticalMember member, out bool[] start, out bool[] end)
+        {
+            start = new bool[6];
+            end = new bool[6];
+            foreach (ReleaseConditions rc in member.GetReleaseConditions())
+            {
+                var r = new[] { rc.Fx, rc.Fy, rc.Fz, rc.Mx, rc.My, rc.Mz };
+                if (rc.Start) start = r; else end = r;
+            }
         }
 
         /// <summary>
@@ -285,7 +333,7 @@ namespace CivilConnection.Robot
 
         /// <summary>
         /// Section properties (A, Iy, Iz, Ix, Wy, Wz in SI) from the end face of a straight member, in the member axes:
-        /// z in the vertical plane through the axis (global X for vertical members) and y = z x axis.
+        /// z along the section height (SectionUp) and y = z x axis.
         /// The torsion constant uses the Saint-Venant approximation A^4 / (4 pi^2 Ip).
         /// </summary>
         internal static double[] SectionFromGeometry(FamilyInstance fi)
@@ -295,8 +343,9 @@ namespace CivilConnection.Robot
             else if (fi.Location is LocationPoint lp) { p0 = lp.Point; p1 = lp.Point + XYZ.BasisZ; }
             else return null;
 
+            // same section axes as the bar orientation (SectionUp), so the properties are not rotated twice
             XYZ ex = (p1 - p0).Normalize();
-            XYZ ez = Math.Abs(ex.Z) > 0.999 ? XYZ.BasisX : (XYZ.BasisZ - ex * ex.Z).Normalize();
+            XYZ ez = SectionUp(fi, ex) ?? (Math.Abs(ex.Z) > 0.999 ? XYZ.BasisX : (XYZ.BasisZ - ex * ex.Z).Normalize());
             XYZ ey = ez.CrossProduct(ex);
 
             // largest planar face perpendicular to the axis
